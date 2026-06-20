@@ -1,0 +1,34 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "nesyarena"
+version = "0.1.0.dev0"
+description = "NeSyArena: measuring semantic fidelity of neuro-symbolic reasoning systems against their claimed semantics"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Ionel Eduard Stan" }]
+dependencies = [
+    "numpy>=1.26",
+]
+
+[project.optional-dependencies]
+oracles = ["problog>=2.2", "pysdd>=1.0"]   # exact PLP oracle beyond the brute-force fact limit
+reporting = ["matplotlib>=3.8", "pyyaml>=6.0"]
+dev = ["pytest>=8.0", "ruff>=0.4"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "NPY", "B"]

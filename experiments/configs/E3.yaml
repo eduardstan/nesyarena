@@ -1,0 +1,8 @@
+# E3 — surrogate axis (protocol G3): LSE_tau vs the max-join it replaces.
+# Closed-form prediction: bias = tau*ln(P) for equal scores (Prop. 3).
+tau_geomspace: { start: 0.005, stop: 0.4, num: 17 }
+P: [2, 4, 8, 16]
+equal_scores: { s: 0.6 }
+perturbed: { s: 0.6, delta: 0.05 }   # one boosted proof: the dilemma regime
+figures:
+  F4: { P_show: [2, 4, 8, 16] }

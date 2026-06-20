@@ -1,0 +1,57 @@
+{
+ "A_g1_values": {
+  "scallop:addmultprob": {
+   "vs_exact": 0.6087023833950306,
+   "vs_ref": 1.1102230246251565e-16
+  },
+  "scallop:minmaxprob": {
+   "vs_exact": 0.26304,
+   "vs_ref": 0.0
+  },
+  "scallop:topkproofs(k=1)": {
+   "vs_exact": 0.3778560000000002,
+   "vs_ref": 5.551115123125783e-17
+  },
+  "scallop:topkproofs(k=3)": {
+   "vs_exact": 0.0604981051097222,
+   "vs_ref": 2.220446049250313e-16
+  }
+ },
+ "B_recursion": {
+  "chain:scallop:addmultprob": 0.0,
+  "chain:scallop:minmaxprob": 0.0,
+  "chain:scallop:topkproofs(k=1)": 0.0,
+  "cyclic:scallop:addmultprob": {
+   "exact_wmc_depth8": 0.7200000000000001,
+   "reference_depth8": 1.0,
+   "scallop": 0.7200000000000001
+  },
+  "cyclic:scallop:minmaxprob": {
+   "exact_wmc_depth8": 0.7200000000000001,
+   "reference_depth8": 0.8,
+   "scallop": 0.8
+  },
+  "cyclic:scallop:topkproofs(k=1)": {
+   "exact_wmc_depth8": 0.7200000000000001,
+   "reference_depth8": 0.7200000000000001,
+   "scallop": 0.7200000000000001
+  },
+  "cyclic:scallop:topkproofs(k=3)": {
+   "exact_wmc_depth8": 0.7200000000000001,
+   "reference_depth8": 0.7200000000000001,
+   "scallop": 0.7200000000000001
+  }
+ },
+ "C_grad_fd": {
+  "h": 1e-05,
+  "max_dev": {
+   "scallop:addmultprob": 3.4244829194562953e-12,
+   "scallop:minmaxprob": 0.0,
+   "scallop:topkproofs(k=1)": 4.610312132058425e-12,
+   "scallop:topkproofs(k=3)": 7.906938992441326e-12
+  },
+  "skipped_near_clamp": 0,
+  "tol": 0.0001
+ },
+ "scallopy_version": "0.2.4-release-wheel"
+}

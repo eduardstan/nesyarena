@@ -1,0 +1,23 @@
+# E1 — overlap sweep (protocol G1 grid). Committed config = the registered
+# experiment; the runner records this file's content hash in its output.
+family: G1
+grid:
+  P: [1, 2, 3, 4, 5, 6, 7, 8]
+  L: [2, 3, 4]
+  c_max_per_L: true        # c in 0..L-1
+  p: [0.3, 0.6, 0.9]
+max_facts: 22              # brute-force WMC constraint; larger cells are skipped (logged)
+heterogeneous:
+  seeds: [1, 2, 3, 4, 5]
+  P: 4
+  L: 3
+  c: 1
+suts: [exact-wmc, add-mult(clamped), top-1-proofs, top-3-proofs, min-max-prob]
+figures:
+  F1:                      # error-surface small multiples: c x P heatmap per SUT
+    L: 4
+    p: 0.6
+  F2:                      # crossover curves: signed error vs c
+    P: 4
+    L: 4
+    p: 0.6

@@ -1,0 +1,52 @@
+{
+ "gradient_liveness": {
+  "add-mult(clamped)": 0.6111111111111112,
+  "exact-wmc": 1.0,
+  "min-max-prob": 0.1660920869254202,
+  "top-1-proofs": 0.4982762607762608,
+  "top-3-proofs": 0.8319567777901112
+ },
+ "package_version": "0.1.0.dev0",
+ "profiles": {
+  "add-mult(clamped)": {
+   "gradient liveness": 0.6111111111111112,
+   "learning transfer (fact table)": 0.898510937341496,
+   "multiplicity (c=0, p=0.6)": 0.8879256097405621,
+   "overlap (P=4, p=0.6)": 0.7258917586017394,
+   "pixel transfer efficiency": 0.6742325088120565,
+   "saturation (p=0.9, P>=3)": 0.8827974974318504
+  },
+  "exact-wmc": {
+   "gradient liveness": 1.0,
+   "learning transfer (fact table)": 0.9999999921372262,
+   "multiplicity (c=0, p=0.6)": 1.0,
+   "overlap (P=4, p=0.6)": 1.0,
+   "pixel transfer efficiency": 1.0,
+   "saturation (p=0.9, P>=3)": 1.0
+  },
+  "min-max-prob": {
+   "gradient liveness": 0.1660920869254202,
+   "learning transfer (fact table)": 0.9050917749261417,
+   "multiplicity (c=0, p=0.6)": 0.7737670029274305,
+   "overlap (P=4, p=0.6)": 0.8099749048986282,
+   "pixel transfer efficiency": 0.7344142276132021,
+   "saturation (p=0.9, P>=3)": 0.929540277509015
+  },
+  "top-1-proofs": {
+   "gradient liveness": 0.4982762607762608,
+   "learning transfer (fact table)": 0.8914505538213353,
+   "multiplicity (c=0, p=0.6)": 0.6548743902594378,
+   "overlap (P=4, p=0.6)": 0.7430860191760383,
+   "pixel transfer efficiency": 0.9158559132590606,
+   "saturation (p=0.9, P>=3)": 0.8362841352212109
+  },
+  "top-3-proofs": {
+   "gradient liveness": 0.8319567777901112,
+   "learning transfer (fact table)": 0.9964282772227749,
+   "multiplicity (c=0, p=0.6)": 0.9010342516098379,
+   "overlap (P=4, p=0.6)": 0.9464301942800384,
+   "pixel transfer efficiency": 0.995516984944215,
+   "saturation (p=0.9, P>=3)": 0.9938708398118845
+  }
+ }
+}
