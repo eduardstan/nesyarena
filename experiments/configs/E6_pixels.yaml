@@ -1,0 +1,25 @@
+# E6 (pixel-perception setting) — the H8 headline: perception trained
+# end-to-end through each reasoner on synthetic images with closed-form
+# Bayes posteriors (what makes calibration exactly measurable).
+alpha: 1.2          # signal strength; Bayes posterior is sigmoid(alpha*<x,sig> - alpha^2/2 + logit(pi))
+pi: 0.55            # fact prior (treatment)
+din: 64             # image dimension (8x8)
+ncell: 6            # facts per sample (treatment structure has 6 facts)
+seeds: [0, 1, 2]
+epochs: 20
+n_train: 4000
+n_test: 1500
+batch: 64
+lr: 0.002
+hidden: 16
+treatment:
+  structure: { P: 4, L: 3, c: 2 }
+  held_queries: [[0],[1],[2],[3],[0,1,2]]
+  suts: [exact, addmult, top1, top3, minmax]
+control:
+  pA_true: [0.5, 0.3, 0.2]
+  pB_true: [0.3, 0.4, 0.3]
+  train_terms: [[0,2],[1,1],[2,0]]   # query: zA + zB == 2 (mutually exclusive)
+  held_terms: [[0,0],[1,1],[2,2]]    # transfer query: zA == zB
+  # top3: k >= P on this structure — predicted identical to exact (measured)
+  suts: [exact, addmult, top1, top3, minmax]

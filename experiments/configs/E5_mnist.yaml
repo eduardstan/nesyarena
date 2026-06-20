@@ -1,0 +1,24 @@
+# E5/E6 at MNIST scale — real digits, CNN-free small MLP perception.
+# Treatment (MNIST-path): 3x3 grid of digit images; a cell is open iff its
+# digit is even; query = monotone reachability (0,0) -> (2,2): 6 paths of 5
+# cells sharing cells — genuine rung-P overlap. Control (MNIST-sum): pairs of
+# digits restricted to {0,1,2}; train query zA+zB == 2 (mutually exclusive
+# proofs); transfer query zA == zB.
+seeds: [0, 1, 2]
+epochs: 6
+n_train: 3000
+n_test: 1500
+batch: 64
+lr: 0.001
+hidden: 128
+treatment:
+  grid: 3
+  held_queries: [[0],[2],[5],[0,1,2],[3,4,5]]   # subsets of the 6 path-proofs
+  suts: [exact, addmult, top1, top3, minmax]
+control:
+  digits: [0, 1, 2]
+  train_terms: [[0,2],[1,1],[2,0]]
+  held_terms: [[0,0],[1,1],[2,2]]
+  # top3 has k >= P here (3 mutually exclusive proofs): predicted identical
+  # to exact — included so the identity is measured, not asserted
+  suts: [exact, addmult, top1, top3, minmax]
