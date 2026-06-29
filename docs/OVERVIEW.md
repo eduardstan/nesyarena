@@ -190,6 +190,29 @@ Grouped by what they do, with who-calls-what. Source is `src/nesyarena/`.
 
 ## 5. How an external system plugs in (e.g. Scallop)
 
+**First, why adapters exist at all.** A natural objection: *"given a program
+and the declared algebra, isn't that enough to do the reasoning? what is the
+adapter for?"* Yes — the algebra plus the engine already do the reasoning
+**correctly**; that is exactly what the oracle is. But the goal of this project
+is not to do reasoning. It is to measure whether a *real, deployed* system
+computes what it claims. Real systems do **not** run the declared algebra —
+they approximate it (for speed and differentiability), and those deviations are
+the object of study. You cannot obtain "what Scallop actually returns" by
+running the algebra; you have to run *Scallop itself* on the same program. The
+adapter is the bridge that lets an external system consume our program and hand
+back its (possibly distorted) answer, untouched, so it can be compared to the
+oracle. Without adapters there would be nothing to compare the oracle
+against — you would be comparing the theory to itself.
+
+> **The analogy:** it is a **conformance test for a compiler**. The algebra is
+> the *language spec* (what a program *should* evaluate to). A NeSy system
+> (Scallop, DeepLog) is a *compiler* — a real implementation that makes
+> approximations and engineering choices, and may deviate. The adapter is the
+> *test harness* that runs the actual compiler on the test program and captures
+> its output. The oracle computes the spec's expected output. The result is the
+> difference. You cannot test a compiler by only reading the spec; you must run
+> it.
+
 An **adapter** (`adapters/base.py` defines the interface) wraps one
 configuration of a backend and answers queries over the *same* `GroundProgram`
 the oracle uses:
@@ -308,3 +331,60 @@ for a step-by-step guide and a conformance checklist.
 reproduce. What remains is breadth (seeds, systems, scale), a couple of
 specified-but-unbuilt pieces, and the writing — not new core machinery. That's
 the honest "what's left", and most of it is parallelizable.
+
+---
+
+## 8. Anticipated questions
+
+**Q. Isn't the declared algebra enough to do the reasoning? What is the adapter
+for?** Yes, the algebra + engine reason correctly — that is the oracle. The
+adapter exists because the goal is to *audit a real system*, which requires
+running that system (it approximates the algebra) and comparing it to the
+oracle. See §5 for the full answer and the compiler-conformance analogy. In one
+line: **the algebra tells you what the answer *should* be; the adapter tells
+you what a real system *actually* returns; the science is the gap.**
+
+**Q. Then what is the difference between `algebra.py`, `suts.py`, the oracle,
+and an adapter?** Four distinct roles:
+| | what it is |
+|---|---|
+| `algebra.py` + `engine.py` | the rules and the machinery to evaluate a program under them — the *ideal* computation |
+| `oracle.py` | the *exact* value of the claimed semantics (the ground truth `ε` is measured against) |
+| `suts.py` | *approximation strategies* re-implemented in-house (add-mult, top-k, …), with error we can characterise analytically |
+| `adapters/` | a *real external system* (Scallop, DeepLog), wrapped to consume the same program and report what it actually computes |
+`algebra.py` is **not** the configuration of a system under test; it is the set
+of exact semirings the engine evaluates under. The systems under test are the
+SUTs and the adapters.
+
+**Q. Do I need Scallop or DeepLog installed to use the arena?** No. The whole
+instrument and all experiments run on the reference SUTs alone. Scallop/DeepLog
+are *external-validity checks*; they need extra packages (`scallopy` is
+Python-3.10-only — see `INSTALL_SCALLOP.md`). Without them, the reference SUTs
+stand in as the idealised models.
+
+**Q. A deployed system disagrees with its claimed semantics — isn't that just a
+bug to fix?** No — it is the *result*. The arena records the disagreement with
+the witnessing instance and never patches it. Whether the deviation is an
+intentional approximation or an outright defect, the point is that it is
+invisible to accuracy and only the oracle-grounded measurement reveals it.
+
+**Q. Why measure signed error against an oracle instead of just task accuracy?**
+Because a reasoner that computes a *monotone distortion* of the correct value
+ranks answers correctly — so it classifies correctly — while being arbitrarily
+miscalibrated as a probabilistic reasoner, and while corrupting the perception
+network trained through it. The experiments show exactly this: accuracy ties
+across five reasoners while calibration and transfer separate them.
+
+**Q. Why is perception synthetic in some experiments?** Because calibration is
+measured against the *exact Bayes posterior*, which is only available in closed
+form when the data-generating model is known. The MNIST experiments confirm the
+findings survive real images; the synthetic generator is what makes the
+reasoning-layer error exactly measurable.
+
+**Q. Isn't this just probabilistic logic programming / semiring provenance
+again?** The algebraic background is inherited from that literature and is cited
+as such (see the anonymous KR submission for the formal treatment). What is new
+here is the *measurement*: the fidelity definitions, the signed error laws as
+registered predictions, the exact oracles with analytic gradients, the
+conformance measurements of deployed systems, and the learning-consequence
+results — none of which the algebra alone produces.
