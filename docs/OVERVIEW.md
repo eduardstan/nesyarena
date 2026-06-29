@@ -2,9 +2,9 @@
 
 This is the document to read first. It explains what the project does, how the
 pieces fit together, how to use them, and what is and isn't done yet. No prior
-context assumed. (The formal version is `paper/main.tex`; the registered
-research design is `NeSyArena_protocol_v1.md`. This file is the plain-language
-bridge to both.)
+context assumed. (The formal definitions and theorems are in the anonymous KR
+submission; the registered research design is `NeSyArena_protocol_v1.md`. This
+file is the plain-language bridge.)
 
 ---
 
@@ -264,7 +264,7 @@ make all                          # every experiment → out/*.json, out/*.png, 
 ### 6.2 Score one program by hand
 See §3 — pick or build an `Instance`, call `.value()`/`.error()` on any SUT.
 
-### 6.3 Choose an algebra and run the engine (Simone's question)
+### 6.3 Choose an algebra and run the engine
 `algebra.py` is *used by the engine*: you pass a semiring to tell the engine
 how to evaluate a program. Example — the truncation effect on a chain whose
 query needs 5 reasoning steps:
@@ -312,7 +312,7 @@ for a step-by-step guide and a conformance checklist.
   test-long generalization cliffs at the predicted depth.
 - Conformance of two deployed substrates (Scallop, DeepLog) measured against
   the oracle, including gradients.
-- The 18-page technical report (`paper/main.tex`) and a one-command repro.
+- A written technical report and a one-command reproduction (`make all`).
 
 **Missing / next (this is where help is welcome):**
 - **Breadth of evidence for a paper submission:** lift every learning run to
