@@ -33,6 +33,7 @@ clutrr:
 # scorecard + consolidated RESULTS.md (needs inference + learning outputs)
 report:
 	$(PY) -m experiments.scorecard
+	$(PY) -m experiments.arena
 	$(PY) -m experiments.report
 
 # everything, in dependency order
