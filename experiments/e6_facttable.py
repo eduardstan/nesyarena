@@ -42,7 +42,8 @@ from nesyarena.oracle import wmc  # noqa: E402
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.environ.get("NESYARENA_OUT", os.path.join(HERE, "..", "out"))
-SUT_K = {"exact": None, "addmult": None, "top1": 1, "top3": 3, "minmax": None}
+SUT_K = {"exact": None, "addmult": None, "addmult_st": None,
+         "top1": 1, "top3": 3, "minmax": None}
 EPS = 1e-4
 
 
@@ -105,7 +106,7 @@ def cat_value(name, terms, pA, pB, k):
     """Disjoint categorical sum. exact and addmult share one path: on
     mutually exclusive proofs add-mult IS distribution semantics (H9)."""
     vals = torch.stack([pA[i] * pB[j] for (i, j) in terms])
-    if name in ("exact", "addmult"):
+    if name in ("exact", "addmult", "addmult_st"):  # disjoint: no clamp active
         return vals.sum()
     if name.startswith("top"):
         order = torch.argsort(vals.detach(), descending=True)[:k]  # frozen

@@ -15,7 +15,8 @@ hidden: 16
 treatment:
   structure: { P: 4, L: 3, c: 2 }
   held_queries: [[0],[1],[2],[3],[0,1,2]]
-  suts: [exact, addmult, top1, top3, minmax]
+  # addmult_st per finding F-3; registered predictions as in E6_facttable
+  suts: [exact, addmult, addmult_st, top1, top3, minmax]
 control:
   pA_true: [0.5, 0.3, 0.2]
   pB_true: [0.3, 0.4, 0.3]

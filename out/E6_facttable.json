@@ -12,6 +12,7 @@
   "suts": [
    "exact",
    "addmult",
+   "addmult_st",
    "top1",
    "top3",
    "minmax"
@@ -76,9 +77,15 @@
    "truth_seeds_base": 100
   }
  },
- "config_sha256": "0a835a90530e66e1f4efc7e6a42c986fd20ee590e8e69ab245b9f535d0e8368b",
+ "config_sha256": "946842bccaaaff9d9f4084df74f71b5bcee07b5829cb9080eb21cb9fdbdc9c5c",
  "control": {
   "addmult": {
+   "trans": [
+    0.009898381850693288,
+    0.019796763700924654
+   ]
+  },
+  "addmult_st": {
    "trans": [
     0.009898381850693288,
     0.019796763700924654
@@ -113,6 +120,20 @@
  "package_version": "0.1.0.dev0",
  "treatment": {
   "addmult": {
+   "fact_mae": [
+    0.12769044655044323,
+    0.03001513391018969
+   ],
+   "facts_q": [
+    0.12306242519649283,
+    0.04233217971270765
+   ],
+   "trans": [
+    0.10148906265850399,
+    0.028850821936481322
+   ]
+  },
+  "addmult_st": {
    "fact_mae": [
     0.12769044655044323,
     0.03001513391018969
