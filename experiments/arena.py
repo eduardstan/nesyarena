@@ -151,6 +151,21 @@ def main():
             conformance=0.0, via="measured live (this battery)",
             findings="sound bounds 284/284; lower border implicant-based"))
 
+    # ---- DeepProbLog standalone (deepproblog 2.0.6) — measured live ---------
+    dp = json.load(open(os.path.join(OUT, "conformance_deepproblog.json")))
+    dp_vals = {r["id"]: r for r in dp["rows"] if r["battery"] == "values"}
+    dp_errs = [dp_vals[i.id]["value"] - i.oracle_value for i in vals]
+    rows.append(dict(
+        system="deepproblog exact engine", version="deepproblog 2.0.6",
+        claimed="distribution semantics",
+        phi=1.0 - float(np.mean(np.abs(dp_errs))),
+        mean_abs_err=float(np.mean(np.abs(dp_errs))),
+        worst_signed_err=float(max(dp_errs, key=abs)),
+        grad_cos=math.nan, grad_liveness=math.nan,
+        cyclic=[r for r in dp["rows"] if r["id"] == "cyclic-s5"][0]["value"],
+        conformance=0.0, via="measured live (this battery); see conformance_deepproblog.md",
+        findings="—"))
+
     # ---- DeepLog (pydeeplog 3.0.3) — exact circuits -------------------------
     rows.append(dict(
         system="deeplog exact circuits", version="pydeeplog 3.0.3",

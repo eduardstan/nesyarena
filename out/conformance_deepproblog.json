@@ -1,0 +1,513 @@
+{
+ "deepproblog_version": "2.0.6",
+ "engine": "ExactEngine",
+ "experiment": "conformance-deepproblog",
+ "max_abs_dev_per_battery": {
+  "chains": 0.0,
+  "cyclic": 0.0,
+  "gradients": 4.440892098500626e-16,
+  "probes": 1.1102230246251565e-16,
+  "values": 4.440892098500626e-16,
+  "witnesses": 1.1102230246251565e-16
+ },
+ "package_version": "0.1.0.dev0",
+ "rows": [
+  {
+   "abs_dev": 2.7755575615628914e-16,
+   "battery": "values",
+   "id": "values-00",
+   "oracle": 0.3596854654053186,
+   "value": 0.35968546540531887
+  },
+  {
+   "abs_dev": 0.0,
+   "battery": "values",
+   "id": "values-01",
+   "oracle": 0.504,
+   "value": 0.504
+  },
+  {
+   "abs_dev": 0.0,
+   "battery": "values",
+   "id": "values-02",
+   "oracle": 0.891,
+   "value": 0.891
+  },
+  {
+   "abs_dev": 5.551115123125783e-17,
+   "battery": "values",
+   "id": "values-03",
+   "oracle": 0.3834059313494211,
+   "value": 0.383405931349421
+  },
+  {
+   "abs_dev": 2.220446049250313e-16,
+   "battery": "values",
+   "id": "values-04",
+   "oracle": 0.9931410000000003,
+   "value": 0.993141
+  },
+  {
+   "abs_dev": 1.1102230246251565e-16,
+   "battery": "values",
+   "id": "values-05",
+   "oracle": 0.5903999999999999,
+   "value": 0.5904
+  },
+  {
+   "abs_dev": 5.551115123125783e-17,
+   "battery": "values",
+   "id": "values-06",
+   "oracle": 0.3493333261047685,
+   "value": 0.34933332610476847
+  },
+  {
+   "abs_dev": 5.551115123125783e-17,
+   "battery": "values",
+   "id": "values-07",
+   "oracle": 0.35424,
+   "value": 0.35423999999999994
+  },
+  {
+   "abs_dev": 1.1102230246251565e-16,
+   "battery": "values",
+   "id": "values-08",
+   "oracle": 0.5903999999999999,
+   "value": 0.5904
+  },
+  {
+   "abs_dev": 3.3306690738754696e-16,
+   "battery": "values",
+   "id": "values-09",
+   "oracle": 0.6421752134466725,
+   "value": 0.6421752134466722
+  },
+  {
+   "abs_dev": 0.0,
+   "battery": "values",
+   "id": "values-10",
+   "oracle": 0.045899999999999996,
+   "value": 0.045899999999999996
+  },
+  {
+   "abs_dev": 5.551115123125783e-17,
+   "battery": "values",
+   "id": "values-11",
+   "oracle": 0.4427136,
+   "value": 0.44271360000000004
+  },
+  {
+   "abs_dev": 2.220446049250313e-16,
+   "battery": "values",
+   "id": "values-12",
+   "oracle": 0.34309140702968677,
+   "value": 0.34309140702968655
+  },
+  {
+   "abs_dev": 0.0,
+   "battery": "values",
+   "id": "values-13",
+   "oracle": 0.24642899999999998,
+   "value": 0.24642899999999998
+  },
+  {
+   "abs_dev": 0.0,
+   "battery": "values",
+   "id": "values-14",
+   "oracle": 0.8019000000000001,
+   "value": 0.8019000000000001
+  },
+  {
+   "abs_dev": 3.3306690738754696e-16,
+   "battery": "values",
+   "id": "values-15",
+   "oracle": 0.6556524981523341,
+   "value": 0.6556524981523337
+  },
+  {
+   "abs_dev": 0.0,
+   "battery": "values",
+   "id": "values-16",
+   "oracle": 0.33696,
+   "value": 0.33696
+  },
+  {
+   "abs_dev": 0.0,
+   "battery": "values",
+   "id": "values-17",
+   "oracle": 0.05913,
+   "value": 0.05913
+  },
+  {
+   "abs_dev": 4.440892098500626e-16,
+   "battery": "values",
+   "id": "values-18",
+   "oracle": 0.6783201632075772,
+   "value": 0.6783201632075776
+  },
+  {
+   "abs_dev": 0.0,
+   "battery": "values",
+   "id": "values-19",
+   "oracle": 0.891,
+   "value": 0.891
+  },
+  {
+   "abs_dev": 1.1102230246251565e-16,
+   "battery": "values",
+   "id": "values-20",
+   "oracle": 0.7378560000000002,
+   "value": 0.7378560000000001
+  },
+  {
+   "abs_dev": 0.0,
+   "battery": "values",
+   "id": "values-21",
+   "oracle": 0.7140303725891313,
+   "value": 0.7140303725891313
+  },
+  {
+   "abs_dev": 5.551115123125783e-17,
+   "battery": "values",
+   "id": "values-22",
+   "oracle": 0.35424,
+   "value": 0.35423999999999994
+  },
+  {
+   "abs_dev": 0.0,
+   "battery": "values",
+   "id": "values-23",
+   "oracle": 0.891,
+   "value": 0.891
+  },
+  {
+   "abs_dev": 5.551115123125783e-17,
+   "battery": "values",
+   "id": "values-24",
+   "oracle": 0.3391750682973395,
+   "value": 0.33917506829733957
+  },
+  {
+   "abs_dev": 0.0,
+   "battery": "values",
+   "id": "values-25",
+   "oracle": 0.153,
+   "value": 0.153
+  },
+  {
+   "abs_dev": 3.3306690738754696e-16,
+   "battery": "values",
+   "id": "values-26",
+   "oracle": 0.9946064195190003,
+   "value": 0.994606419519
+  },
+  {
+   "abs_dev": 0.0,
+   "battery": "values",
+   "id": "values-27",
+   "oracle": 0.908554252690035,
+   "value": 0.908554252690035
+  },
+  {
+   "abs_dev": 0.0,
+   "battery": "values",
+   "id": "values-28",
+   "oracle": 0.24642899999999998,
+   "value": 0.24642899999999998
+  },
+  {
+   "abs_dev": 0.0,
+   "battery": "values",
+   "id": "values-29",
+   "oracle": 0.1719,
+   "value": 0.1719
+  },
+  {
+   "abs_dev": 2.220446049250313e-16,
+   "battery": "values",
+   "id": "values-30",
+   "oracle": 0.6499179325611915,
+   "value": 0.6499179325611917
+  },
+  {
+   "abs_dev": 0.0,
+   "battery": "values",
+   "id": "values-31",
+   "oracle": 0.8019000000000001,
+   "value": 0.8019000000000001
+  },
+  {
+   "abs_dev": 2.220446049250313e-16,
+   "battery": "values",
+   "id": "values-32",
+   "oracle": 0.8988271110000003,
+   "value": 0.8988271110000001
+  },
+  {
+   "abs_dev": 1.1102230246251565e-16,
+   "battery": "values",
+   "id": "values-33",
+   "oracle": 0.33023893244506897,
+   "value": 0.33023893244506886
+  },
+  {
+   "abs_dev": 2.220446049250313e-16,
+   "battery": "values",
+   "id": "values-34",
+   "oracle": 0.9986967900000002,
+   "value": 0.99869679
+  },
+  {
+   "abs_dev": 0.0,
+   "battery": "values",
+   "id": "values-35",
+   "oracle": 0.1971,
+   "value": 0.1971
+  },
+  {
+   "abs_dev": 2.7755575615628914e-16,
+   "battery": "values",
+   "id": "values-36",
+   "oracle": 0.3270410351140557,
+   "value": 0.32704103511405597
+  },
+  {
+   "abs_dev": 1.1102230246251565e-16,
+   "battery": "values",
+   "id": "values-37",
+   "oracle": 0.8991000000000001,
+   "value": 0.8991
+  },
+  {
+   "abs_dev": 0.0,
+   "battery": "values",
+   "id": "values-38",
+   "oracle": 0.8019000000000001,
+   "value": 0.8019000000000001
+  },
+  {
+   "abs_dev": 2.220446049250313e-16,
+   "battery": "values",
+   "id": "values-39",
+   "oracle": 0.5016349671041122,
+   "value": 0.5016349671041124
+  },
+  {
+   "abs_dev": 1.1102230246251565e-16,
+   "battery": "values",
+   "id": "values-40",
+   "oracle": 0.7378560000000002,
+   "value": 0.7378560000000001
+  },
+  {
+   "abs_dev": 4.163336342344337e-17,
+   "battery": "values",
+   "id": "values-41",
+   "oracle": 0.10370420055899994,
+   "value": 0.10370420055899998
+  },
+  {
+   "abs_dev": 1.1102230246251565e-16,
+   "battery": "values",
+   "id": "values-42",
+   "oracle": 0.4578597237398757,
+   "value": 0.4578597237398756
+  },
+  {
+   "abs_dev": 2.220446049250313e-16,
+   "battery": "values",
+   "id": "values-43",
+   "oracle": 0.9986967900000002,
+   "value": 0.99869679
+  },
+  {
+   "abs_dev": 0.0,
+   "battery": "values",
+   "id": "values-44",
+   "oracle": 0.1971,
+   "value": 0.1971
+  },
+  {
+   "abs_dev": 2.220446049250313e-16,
+   "battery": "values",
+   "id": "values-45",
+   "oracle": 0.6507111005141997,
+   "value": 0.6507111005141999
+  },
+  {
+   "abs_dev": 1.1102230246251565e-16,
+   "battery": "values",
+   "id": "values-46",
+   "oracle": 0.5903999999999999,
+   "value": 0.5904
+  },
+  {
+   "abs_dev": 2.7755575615628914e-17,
+   "battery": "values",
+   "id": "values-47",
+   "oracle": 0.22796999999999998,
+   "value": 0.22797
+  },
+  {
+   "abs_dev": 1.1102230246251565e-16,
+   "battery": "values",
+   "id": "values-48",
+   "oracle": 0.8810969760225614,
+   "value": 0.8810969760225615
+  },
+  {
+   "abs_dev": 1.1102230246251565e-16,
+   "battery": "values",
+   "id": "values-49",
+   "oracle": 0.9639000000000001,
+   "value": 0.9639
+  },
+  {
+   "abs_dev": 2.220446049250313e-16,
+   "battery": "gradients",
+   "id": "gradients-00",
+   "oracle": 0.8191102411727784,
+   "value": 0.8191102411727782
+  },
+  {
+   "abs_dev": 0.0,
+   "battery": "gradients",
+   "id": "gradients-01",
+   "oracle": 0.6914043378247432,
+   "value": 0.6914043378247432
+  },
+  {
+   "abs_dev": 4.440892098500626e-16,
+   "battery": "gradients",
+   "id": "gradients-02",
+   "oracle": 0.5087991729146404,
+   "value": 0.5087991729146408
+  },
+  {
+   "abs_dev": 3.3306690738754696e-16,
+   "battery": "gradients",
+   "id": "gradients-03",
+   "oracle": 0.7702744195571768,
+   "value": 0.7702744195571765
+  },
+  {
+   "abs_dev": 2.220446049250313e-16,
+   "battery": "gradients",
+   "id": "gradients-04",
+   "oracle": 0.7973828518209356,
+   "value": 0.7973828518209358
+  },
+  {
+   "abs_dev": 1.1102230246251565e-16,
+   "battery": "gradients",
+   "id": "gradients-05",
+   "oracle": 0.9308951656938903,
+   "value": 0.9308951656938904
+  },
+  {
+   "abs_dev": 4.440892098500626e-16,
+   "battery": "gradients",
+   "id": "gradients-06",
+   "oracle": 0.6175543746268681,
+   "value": 0.6175543746268677
+  },
+  {
+   "abs_dev": 1.1102230246251565e-16,
+   "battery": "gradients",
+   "id": "gradients-07",
+   "oracle": 0.7843075620132808,
+   "value": 0.7843075620132807
+  },
+  {
+   "abs_dev": 0.0,
+   "battery": "gradients",
+   "id": "gradients-08",
+   "oracle": 0.22705915842107816,
+   "value": 0.22705915842107816
+  },
+  {
+   "abs_dev": 1.1102230246251565e-16,
+   "battery": "gradients",
+   "id": "gradients-09",
+   "oracle": 0.9138769071084094,
+   "value": 0.9138769071084093
+  },
+  {
+   "abs_dev": 0.0,
+   "battery": "chains",
+   "id": "chain-L2",
+   "oracle": 0.81,
+   "value": 0.81
+  },
+  {
+   "abs_dev": 0.0,
+   "battery": "chains",
+   "id": "chain-L4",
+   "oracle": 0.6561000000000001,
+   "value": 0.6561000000000001
+  },
+  {
+   "abs_dev": 0.0,
+   "battery": "chains",
+   "id": "chain-L6",
+   "oracle": 0.5314410000000002,
+   "value": 0.5314410000000002
+  },
+  {
+   "abs_dev": 0.0,
+   "battery": "chains",
+   "id": "chain-L8",
+   "oracle": 0.43046721000000016,
+   "value": 0.43046721000000016
+  },
+  {
+   "abs_dev": 0.0,
+   "battery": "cyclic",
+   "id": "cyclic-s5",
+   "oracle": 0.7200000000000001,
+   "value": 0.7200000000000001
+  },
+  {
+   "abs_dev": 1.1102230246251565e-16,
+   "battery": "probes",
+   "id": "probe-diamond-dag",
+   "oracle": 0.5903999999999999,
+   "value": 0.5904
+  },
+  {
+   "abs_dev": 1.1102230246251565e-16,
+   "battery": "probes",
+   "id": "probe-diamond-cycle",
+   "oracle": 0.5903999999999999,
+   "value": 0.5904
+  },
+  {
+   "abs_dev": 0.0,
+   "battery": "witnesses",
+   "id": "witness-addmult",
+   "oracle": 0.84,
+   "value": 0.84
+  },
+  {
+   "abs_dev": 0.0,
+   "battery": "witnesses",
+   "id": "witness-top1",
+   "oracle": 0.51,
+   "value": 0.51
+  },
+  {
+   "abs_dev": 1.1102230246251565e-16,
+   "battery": "witnesses",
+   "id": "witness-top3",
+   "oracle": 0.7599000000000001,
+   "value": 0.7599
+  },
+  {
+   "abs_dev": 0.0,
+   "battery": "witnesses",
+   "id": "witness-minmax",
+   "oracle": 0.09,
+   "value": 0.09
+  }
+ ]
+}
