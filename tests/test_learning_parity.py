@@ -70,3 +70,24 @@ def test_truth_matches_wmc_at_extremes():
     Z = torch.tensor(rng.random((40, len(facts))) < 0.5)
     v = S.wmc(Z.to(torch.float64))
     assert torch.allclose(v, S.truth(Z).to(torch.float64))
+
+
+def test_straight_through_clamp_matches_f3_semantics():
+    """F-3 model: clamped value, unclamped gradient — including at saturation,
+    where the min-clamp op has zero gradient."""
+    from nesyarena.suts import AddMultStraightThrough
+
+    inst = overlap_family(5, 2, 0, 0.9)  # raw sum >> 1 (clamp region)
+    facts = sorted(inst.probs, key=repr)
+    S = BatchStructure(inst.proofs, facts)
+    p = torch.full((1, len(facts)), 0.9, dtype=torch.float64, requires_grad=True)
+    v = prov_value("addmult_st", S, p)
+    v.sum().backward()
+    assert float(v.detach()[0]) == 1.0                      # clamped value
+    raw_ref = AddMult(clamp=False)
+    rg = raw_ref.grad(inst.proofs, inst.probs)
+    for j, f in enumerate(facts):
+        assert float(p.grad[0, j]) == pytest.approx(rg[f], abs=1e-10)
+    st = AddMultStraightThrough()
+    assert st.value(inst.proofs, inst.probs) == 1.0
+    assert st.grad(inst.proofs, inst.probs) == rg

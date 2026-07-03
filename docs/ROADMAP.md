@@ -73,10 +73,13 @@ they only share the frozen instance set and the adapter protocol.
    frozen reference implementation) to the rebuilt core.
 3. **Recursion-faithful add-mult reference variant** (per finding F-1) +
    recursive overlap sweeps against Scallop.
-4. **Straight-through add-mult reference SUT** (per finding F-3) in the
-   learning layer + re-run of the saturation-relevant E6 cells with it (the
-   deployed-faithful clamp may corrupt perception differently than the
-   min-clamp our published learning numbers model).
+4. **Straight-through add-mult reference SUT** (per finding F-3) — **done,
+   registered prediction refuted**: on both E6 settings training never
+   enters the clamp region, so straight-through and min-clamp trajectories
+   are identical to every decimal; the F-3 value/gradient inconsistency is
+   real at inference (E1: 100% clamp-pinned cells at p=0.9, P>=3) but
+   latent in these learning designs. Follow-up (open): a saturation-prone
+   learning task that keeps the raw proof-sum above 1 mid-training.
 5. **Negation axis** (stratified / conformance-by-refusal), specified in the
    protocol, not yet ported.
 6. **Random-DAG family** + two-level overlap surfaces (beyond the designed G1/G2).

@@ -2,7 +2,7 @@
 
 All numbers produced by the rebuilt core (`src/nesyarena/`) via the
 config-driven runners in `experiments/`; configs and their sha256 are
-embedded in each JSON. Conformance/finding logs: `G2_scallop.md`,
+embedded in each JSON. Conformance logs (one per framework):
 `conformance_scallop.md` (findings F-1, F-3), `conformance_deeplog.md`,
 `conformance_problog_kbest.md`.
 
@@ -48,6 +48,7 @@ max |bias − tau·ln P| = 2.22e-16
 | SUT | control (disjoint) | treatment (overlap) | facts-quality | fact MAE |
 |---|---|---|---|---|
 | addmult | 0.010 ± 0.020 | 0.101 ± 0.029 | 0.123 | 0.128 |
+| addmult_st | 0.010 ± 0.020 | 0.101 ± 0.029 | 0.123 | 0.128 |
 | exact | 0.010 ± 0.020 | 0.000 ± 0.000 | 0.000 | 0.029 |
 | minmax | 0.071 ± 0.059 | 0.095 ± 0.045 | 0.212 | 0.272 |
 | top1 | 0.148 ± 0.076 | 0.109 ± 0.052 | 0.113 | 0.191 |
@@ -58,6 +59,7 @@ max |bias − tau·ln P| = 2.22e-16
 | SUT | accuracy | calibration vs Bayes | transfer | facts-quality |
 |---|---|---|---|---|
 | addmult | 0.734 ± 0.006 | 0.145 ± 0.002 | 0.093 ± 0.002 | 0.101 ± 0.002 |
+| addmult_st | 0.734 ± 0.006 | 0.145 ± 0.002 | 0.093 ± 0.002 | 0.101 ± 0.002 |
 | exact | 0.740 ± 0.004 | 0.101 ± 0.003 | 0.062 ± 0.002 | 0.062 ± 0.002 |
 | minmax | 0.742 ± 0.007 | 0.128 ± 0.002 | 0.085 ± 0.004 | 0.084 ± 0.001 |
 | top1 | 0.744 ± 0.005 | 0.105 ± 0.004 | 0.068 ± 0.003 | 0.069 ± 0.003 |

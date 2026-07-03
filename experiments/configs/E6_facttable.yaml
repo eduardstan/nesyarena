@@ -10,4 +10,9 @@ control:                    # categorical sum (MNIST-sum_2 structure, |dom|=3)
   truth_seeds_base: 200     # rng(200+s) draws dirichlet truths
 seeds: 5
 optimizer: { steps: 4000, lr: 0.05 }
-suts: [exact, addmult, top1, top3, minmax]
+# addmult_st added per finding F-3 (deployed straight-through clamp).
+# REGISTERED (before run): P1 — on the overlap treatment, addmult_st's
+# transfer differs from min-clamp addmult beyond seed noise (direction
+# open: no blackout, but unclamped push with no value feedback);
+# P2 — on the disjoint control (no saturation) addmult_st == addmult == exact.
+suts: [exact, addmult, addmult_st, top1, top3, minmax]

@@ -40,7 +40,8 @@ from nesyarena.learning import BatchStructure, prov_value  # noqa: E402
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.environ.get("NESYARENA_OUT", os.path.join(HERE, "..", "out"))
-SUT_K = {"exact": None, "addmult": None, "top1": 1, "top3": 3, "minmax": None}
+SUT_K = {"exact": None, "addmult": None, "addmult_st": None,
+         "top1": 1, "top3": 3, "minmax": None}
 EPS = 1e-4
 
 

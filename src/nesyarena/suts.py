@@ -80,6 +80,23 @@ class AddMult(Provenance):
         return g
 
 
+class AddMultStraightThrough(Provenance):
+    """Deployed-faithful clamp per finding F-3 (Scallop diffaddmultprob):
+    the VALUE is the clamped proof-sum min(1, sum_j s_j), but the GRADIENT is
+    that of the UNCLAMPED sum — validated against deployed torch-tag autograd
+    to 4.8e-08 on the frozen saturation battery. The (value, gradient) pair is
+    mutually inconsistent in the clamp region by construction: that is the
+    deployed behavior being modeled, not a bug here."""
+
+    name = "add-mult(straight-through)"
+
+    def value(self, proofs, probs):
+        return min(1.0, sum(proof_score(pr, probs) for pr in proofs))
+
+    def grad(self, proofs, probs):
+        return AddMult(clamp=False).grad(proofs, probs)
+
+
 class TopK(Provenance):
     """Exact WMC restricted to the k highest-scoring proofs
     (difftopkproofs-style: differentiates the retained set, selection frozen;
