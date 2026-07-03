@@ -10,6 +10,7 @@ claimed semantics; **phi = 1 only for exact inference**.
 | exact WMC (oracle semantics) | — | **1.000** | +0.000 | 1.000 | 1.000 | 0.720 | 0.0e+00 | — |
 | deeplog exact circuits | pydeeplog 3.0.3 | **1.000** | +0.000 | 1.000 | 1.000 | 0.720 | 1.3e-07 | — |
 | problog kbest lower bound (eps=1e-09) | problog 2.2.10 | **1.000** | +0.000 | n/a | n/a | 0.720 | 0.0e+00 | sound bounds 284/284; lower border implicant-based |
+| deepproblog exact engine | deepproblog 2.0.6 | **1.000** | +0.000 | n/a | n/a | 0.720 | 0.0e+00 | — |
 | scallop topkproofs k=3 | scallopy 0.2.4 | **0.994** | -0.060 | 0.964 | 0.858 | 0.720 | 2.6e-08 | — |
 | problog kbest lower bound (eps=0.2) | problog 2.2.10 | **0.914** | -0.193 | n/a | n/a | 0.720 | 0.0e+00 | sound bounds 284/284; lower border implicant-based |
 | scallop minmaxprob | scallopy 0.2.4 | **0.897** | +0.263 | 0.594 | 0.152 | 0.800 | 0.0e+00 | — |
@@ -46,6 +47,7 @@ claimed semantics; **phi = 1 only for exact inference**.
   - scallop minmaxprob: reference model (values 0.0, grads 0.0)
   - problog kbest lower bound (eps=0.2): measured live (this battery)
   - problog kbest lower bound (eps=1e-09): measured live (this battery)
+  - deepproblog exact engine: measured live (this battery); see conformance_deepproblog.md
   - deeplog exact circuits: measured (values <1e-6 f32, grads 1.3e-07); see conformance_deeplog.md
 
 Reference (idealized) SUT rows are omitted: after validation they are

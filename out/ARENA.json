@@ -102,6 +102,20 @@
   },
   {
    "claimed": "distribution semantics",
+   "conformance": 0.0,
+   "cyclic": 0.7200000000000001,
+   "findings": "\u2014",
+   "grad_cos": NaN,
+   "grad_liveness": NaN,
+   "mean_abs_err": 1.0574874309554616e-16,
+   "phi": 0.9999999999999999,
+   "system": "deepproblog exact engine",
+   "version": "deepproblog 2.0.6",
+   "via": "measured live (this battery); see conformance_deepproblog.md",
+   "worst_signed_err": 4.440892098500626e-16
+  },
+  {
+   "claimed": "distribution semantics",
    "conformance": 1.3e-07,
    "cyclic": 0.7200000000000001,
    "findings": "\u2014",

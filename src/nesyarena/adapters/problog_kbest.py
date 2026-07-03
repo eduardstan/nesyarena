@@ -37,11 +37,15 @@ def render_atom(atom: Atom) -> str:
     return f"{_term(atom.pred)}({', '.join(_term(a) for a in atom.args)})"
 
 
-def render_program(program: GroundProgram, base: dict[Atom, float], query: Atom) -> str:
+def render_program(program: GroundProgram, base: dict[Atom, float],
+                   query: Atom | None = None) -> str:
+    """ProbLog-syntax source; the query directive is included only when a
+    query atom is given (DeepProbLog supplies queries via its own API)."""
     lines = [f"{float(p)}::{render_atom(a)}." for a, p in sorted(base.items(), key=repr)]
     lines += [f"{render_atom(r.head)} :- {', '.join(render_atom(b) for b in r.body)}."
               for r in program.rules]
-    lines.append(f"query({render_atom(query)}).")
+    if query is not None:
+        lines.append(f"query({render_atom(query)}).")
     return "\n".join(lines)
 
 
