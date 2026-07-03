@@ -54,7 +54,9 @@ TopK(1).error(inst.proofs, inst.probs)         # −0.24 ← top-1 under-counts
 | `experiments.e8_clutrr` | CLUTRR-style train-short/test-long: cliffs at the horizon | F11 |
 | `experiments.scorecard` | fidelity-profile radar over six measured axes | radar |
 
-Deployed-system conformance (one log per framework): `out/conformance_scallop.md`
+**The arena leaderboard — every deployed system, same frozen programs, same
+oracle: [`out/ARENA.md`](out/ARENA.md)** (regenerate: `.venv/bin/python -m
+experiments.arena`). Per-framework conformance (one log per framework): `out/conformance_scallop.md`
 (findings F-1, F-3), `out/conformance_deeplog.md`,
 `out/conformance_problog_kbest.md`. Measured results: `out/RESULTS.md`.
 
