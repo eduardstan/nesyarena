@@ -53,8 +53,8 @@ conformance run on the frozen batteries + a short findings log in `out/`.
 
 | framework | what it tests | claimed semantics | effort | notes |
 |---|---|---|---|---|
-| **ProbLog k-best** | second deployed top-k (lower-bound inference) | distribution semantics (approx.) | **S** | `problog` already a dependency; pure Python |
-| **Scallop `diff*` provenances** | deployed *gradient* semantics via torch tags (beyond finite differences) | distribution semantics | **S–M** | py3.10 env exists; completes the gradient story |
+| **ProbLog k-best** | second deployed approximate inference (anytime bounds) | distribution semantics (bounds) | **done** | measured: sound on all 284 cells; exact at tight eps (6e-16); lower border is implicant-based — `out/conformance_problog_kbest.md` |
+| **Scallop `diff*` provenances** | deployed *gradient* semantics via torch tags | distribution semantics | **done** | top-k/min-max grads conform (3e-08); **finding F-3**: diffaddmultprob's clamp is straight-through (clamped value, unclamped gradient) — `out/G2d_scallop_diff.md` |
 | **DeepProbLog (standalone)** | the original NeurIPS-2018 system, exact + approximate modes | distribution semantics | **M** | install may need SWI-Prolog; time-box |
 | **LTN (Logic Tensor Networks)** | *fuzzy* axis: t-norm evaluation + smooth aggregators (pMean vs min) — widens scope beyond probabilistic | product real logic | **M** | new registered error laws possible (pMean bias, analogous to LSE) |
 | Lobster (GPU Scallop) | GPU/CPU consistency of a deployed engine | distribution semantics | **L** | needs CUDA + source build; stretch |
@@ -73,12 +73,16 @@ they only share the frozen instance set and the adapter protocol.
    frozen reference implementation) to the rebuilt core.
 3. **Recursion-faithful add-mult reference variant** (per finding F-1) +
    recursive overlap sweeps against Scallop.
-4. **Negation axis** (stratified / conformance-by-refusal), specified in the
+4. **Straight-through add-mult reference SUT** (per finding F-3) in the
+   learning layer + re-run of the saturation-relevant E6 cells with it (the
+   deployed-faithful clamp may corrupt perception differently than the
+   min-clamp our published learning numbers model).
+5. **Negation axis** (stratified / conformance-by-refusal), specified in the
    protocol, not yet ported.
-5. **Random-DAG family** + two-level overlap surfaces (beyond the designed G1/G2).
-6. **Fuzzy error laws** if/when LTN lands: registered sign/growth predictions
+6. **Random-DAG family** + two-level overlap surfaces (beyond the designed G1/G2).
+7. **Fuzzy error laws** if/when LTN lands: registered sign/growth predictions
    for pMean-style aggregators before running.
-7. Stretch: real-text CLUTRR; compilation-based oracle to pass the 22-fact cap.
+8. Stretch: real-text CLUTRR; compilation-based oracle to pass the 22-fact cap.
 
 ## 5. Project page
 
