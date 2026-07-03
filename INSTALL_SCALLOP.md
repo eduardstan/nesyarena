@@ -9,11 +9,11 @@ cp310-only, so it lives in a dedicated conda env, not the project venv:
 ~/miniconda3/bin/conda create -y -n scallop-py310 python=3.10
 curl -sL -O https://github.com/scallop-lang/scallop/releases/download/0.2.4/scallopy-0.2.4-cp310-cp310-manylinux_2_27_x86_64.whl
 ~/miniconda3/envs/scallop-py310/bin/pip install ./scallopy-0.2.4-cp310-cp310-manylinux_2_27_x86_64.whl numpy
-cd legacy && ~/miniconda3/envs/scallop-py310/bin/python -m nesyarena.adapters_scallop   # gate G2
+~/miniconda3/envs/scallop-py310/bin/python -m experiments.conformance_scallop   # run from the repo root
 ```
 
-Gate G2 result: **conformance pass at machine precision** — see
-`out/G2_scallop.md`.
+Result: **conformance pass at machine precision** — see
+`out/conformance_scallop.md`.
 
 ## The wheel mystery, solved
 
@@ -60,15 +60,17 @@ NOT use it for the arena: provenance behavior has changed since.
 
 Consequence (by design of the protocol): the reference provenances in
 `nesyarena/provenances.py` are the systems-under-test in-container; Scallop is
-external validity, run on an unrestricted machine via `adapters_scallop.py`.
+external validity, run on an unrestricted machine via
+`experiments/conformance_scallop.py`.
 
 ## First thing to run after installing
 
 ```bash
-python3 -m nesyarena.adapters_scallop   # runs gate G2 automatically
+~/miniconda3/envs/scallop-py310/bin/python -m experiments.conformance_scallop
 ```
 
-Gate G2 compares Scallop's `{addmultprob, minmaxprob, topkproofs(k)}` against
+The conformance runner compares Scallop's provenances (values, recursion and
+diff* gradients) against
 the reference SUTs and the exact-WMC oracle on 50 G1 instances. **Any
 discrepancy is a finding about Scallop's deployed semantics — log it with the
 instance, do not normalize it away.**

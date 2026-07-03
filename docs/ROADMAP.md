@@ -44,7 +44,7 @@ for inst in load_instances(battery="values"):
 
 Rules: never edit `instances_v1.json` in place (add a v2 with a rationale);
 report per-battery max |deviation| against the reference SUT *and* against the
-oracle, as in `out/G2_scallop.md`.
+oracle, as in `out/conformance_scallop.md`.
 
 ## 3. Framework integration matrix (candidates)
 
@@ -54,7 +54,7 @@ conformance run on the frozen batteries + a short findings log in `out/`.
 | framework | what it tests | claimed semantics | effort | notes |
 |---|---|---|---|---|
 | **ProbLog k-best** | second deployed approximate inference (anytime bounds) | distribution semantics (bounds) | **done** | measured: sound on all 284 cells; exact at tight eps (6e-16); lower border is implicant-based — `out/conformance_problog_kbest.md` |
-| **Scallop `diff*` provenances** | deployed *gradient* semantics via torch tags | distribution semantics | **done** | top-k/min-max grads conform (3e-08); **finding F-3**: diffaddmultprob's clamp is straight-through (clamped value, unclamped gradient) — `out/G2d_scallop_diff.md` |
+| **Scallop `diff*` provenances** | deployed *gradient* semantics via torch tags | distribution semantics | **done** | top-k/min-max grads conform (3e-08); **finding F-3**: diffaddmultprob's clamp is straight-through (clamped value, unclamped gradient) — `out/conformance_scallop.md` |
 | **DeepProbLog (standalone)** | the original NeurIPS-2018 system, exact + approximate modes | distribution semantics | **M** | install may need SWI-Prolog; time-box |
 | **LTN (Logic Tensor Networks)** | *fuzzy* axis: t-norm evaluation + smooth aggregators (pMean vs min) — widens scope beyond probabilistic | product real logic | **M** | new registered error laws possible (pMean bias, analogous to LSE) |
 | Lobster (GPU Scallop) | GPU/CPU consistency of a deployed engine | distribution semantics | **L** | needs CUDA + source build; stretch |

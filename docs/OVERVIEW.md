@@ -237,8 +237,7 @@ Then we compare Scallop's number to the exact oracle on the identical program.
 On non-recursive programs Scallop reproduces our reference SUTs to ~1e-16
 (machine precision) — which *validates* that the reference SUTs faithfully
 model the deployed system — while deviating from the exact value by exactly
-the amounts the error laws predict. See `out/G2_scallop.md` and
-`out/G2b_scallop_ir.md`. **DeepLog** (`adapters/deeplog.py`) is handled the
+the amounts the error laws predict. See `out/conformance_scallop.md`. **DeepLog** (`adapters/deeplog.py`) is handled the
 same way; it compiles to exact circuits and passes conformance.
 
 > Scallop needs the `scallopy` package, which only ships for Python 3.10 — see

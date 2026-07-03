@@ -1,5 +1,6 @@
 """Adapter protocol + pure Scallop compile helpers (no scallopy needed here;
-the live gates run in the scallop env via scripts/gate_scallop_ir.py)."""
+the live conformance runs execute in the scallop env via
+experiments/conformance_scallop.py)."""
 
 import pytest
 
