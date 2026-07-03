@@ -38,7 +38,7 @@ class MyAdapter:
 1. **No normalization.** The adapter reports what the backend computes. If
    the backend deviates from its claim, the adapter must deviate identically;
    a deviation is a *finding about the backend's deployed semantics*, logged
-   with the witnessing instance (see `out/G2b_scallop_ir.md`, finding F-1).
+   with the witnessing instance (see `out/conformance_scallop.md`, findings F-1 and F-3).
 2. **Shared inputs.** Oracle and backend consume the identical `(program,
    base)`; that isolation is what makes the error attributable to the
    reasoning layer.

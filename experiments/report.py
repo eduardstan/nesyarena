@@ -30,7 +30,8 @@ def main():
          "All numbers produced by the rebuilt core (`src/nesyarena/`) via the",
          "config-driven runners in `experiments/`; configs and their sha256 are",
          "embedded in each JSON. Conformance/finding logs: `G2_scallop.md`,",
-         "`G2b_scallop_ir.md` (finding F-1), `conformance_deeplog.md`.", ""]
+         "`conformance_scallop.md` (findings F-1, F-3), `conformance_deeplog.md`,",
+         "`conformance_problog_kbest.md`.", ""]
 
     if (e1 := load("E1_results.json")):
         L += ["## E1 — overlap sweep (fidelity over the G1 grid)", "",
