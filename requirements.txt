@@ -1,0 +1,40 @@
+# NeSyArena — full pinned environment (Python >= 3.12).
+#
+#   python3 -m venv .venv
+#   .venv/bin/pip install -r requirements.txt
+#   .venv/bin/pip install -e . --no-deps
+#
+# Equivalent via extras (unpinned): pip install -e ".[dev,oracles,reporting,learning,backends]"
+# Versions below are the ones all published numbers were produced with.
+
+# torch/torchvision: CPU builds from the PyTorch index (drop the next line and
+# the +cpu tags if you want default/GPU builds — results are CPU-reproducible).
+--extra-index-url https://download.pytorch.org/whl/cpu
+
+# core
+numpy==2.4.6
+
+# oracles (exact PLP inference beyond the 22-fact brute-force cap)
+problog==2.2.10
+PySDD==1.0.6
+
+# reporting (figures, YAML experiment configs)
+matplotlib==3.10.9
+PyYAML==6.0.3
+
+# learning layer + MNIST experiments
+torch==2.12.0+cpu
+torchvision==0.27.0+cpu
+
+# measured external backends
+pydeeplog==3.0.3        # DeepLog (ML-KULeuven); pulls klaycircuits + lark
+deepproblog==2.0.6      # original DeepProbLog (ExactEngine; ApproximateEngine
+                        # additionally needs SWI-Prolog + PySwip, not included)
+
+# dev
+pytest==9.0.3
+ruff==0.15.16
+
+# NOT installable here: scallopy (Scallop) ships wheels for Python 3.10 only —
+# it lives in a dedicated environment; see INSTALL_SCALLOP.md. Everything else,
+# including the full test suite and all experiments, runs from this file alone.

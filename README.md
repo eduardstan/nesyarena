@@ -22,7 +22,8 @@ Companion docs: [`docs/OVERVIEW.md`](docs/OVERVIEW.md) (plain-language guide),
 
 ```bash
 python3 -m venv .venv
-.venv/bin/pip install -e ".[dev,oracles,reporting]"
+.venv/bin/pip install -r requirements.txt   # pinned full environment (all libraries)
+.venv/bin/pip install -e . --no-deps
 .venv/bin/python -m pytest          # the correctness contract (parity gates + error laws)
 make all                            # every experiment + figures + RESULTS.md
 ```
