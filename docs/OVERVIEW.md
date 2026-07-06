@@ -255,7 +255,8 @@ the witnessing instance — never patched away.
 ### 6.1 Run the suite
 ```bash
 python3 -m venv .venv
-.venv/bin/pip install -e ".[dev,oracles,reporting]"
+.venv/bin/pip install -r requirements.txt   # pinned full environment (all libraries)
+.venv/bin/pip install -e . --no-deps
 .venv/bin/python -m pytest        # the correctness contract (~30 s)
 make all                          # every experiment → out/*.json, out/*.png, out/RESULTS.md
 ```
