@@ -5,7 +5,7 @@
 # composition steps); the convergent reasoner generalizes from k <= 3 to
 # k = 10 because the learned table approaches the true (deterministic)
 # composition.
-seeds: [0, 1, 2]
+seeds: [0, 1, 2, 3, 4]
 train_k: [2, 3]
 test_k: [2, 3, 4, 5, 6, 7, 8, 9, 10]
 budgets: [2, 4, 8, convergent]   # max composition steps at deployment

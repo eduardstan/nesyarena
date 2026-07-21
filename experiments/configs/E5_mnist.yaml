@@ -4,7 +4,7 @@
 # cells sharing cells — genuine rung-P overlap. Control (MNIST-sum): pairs of
 # digits restricted to {0,1,2}; train query zA+zB == 2 (mutually exclusive
 # proofs); transfer query zA == zB.
-seeds: [0, 1, 2]
+seeds: [0, 1, 2, 3, 4]
 epochs: 6
 n_train: 3000
 n_test: 1500

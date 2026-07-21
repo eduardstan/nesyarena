@@ -45,7 +45,7 @@ def auc(scores: np.ndarray, y: np.ndarray) -> float:
     return float((r[pos].mean() - (pos.sum() - 1) / 2) / (~pos).sum())
 
 
-def run(seeds=(0, 1, 2), epochs=20, n_train=3000, batch=64, lr=2e-3):
+def run(seeds=(0, 1, 2, 3, 4), epochs=20, n_train=3000, batch=64, lr=2e-3):
     curves = {"convergent (fixed point)": [], "truncated (n=4 < depth 6)": []}
     for seed in seeds:
         rng = np.random.default_rng(500 + seed)
