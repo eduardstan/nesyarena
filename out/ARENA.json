@@ -28,7 +28,7 @@
    "system": "scallop addmultprob",
    "version": "scallopy 0.2.4",
    "via": "reference model (values 2.2e-16); F-3 grad model (4.8e-08)",
-   "worst_signed_err": 0.6087023833950306
+   "worst_signed_err": 0.6087023833950305
   },
   {
    "claimed": "distribution semantics",
@@ -113,6 +113,34 @@
    "version": "deepproblog 2.0.6",
    "via": "measured live (this battery); see conformance_deepproblog.md",
    "worst_signed_err": 4.440892098500626e-16
+  },
+  {
+   "claimed": "distribution semantics (independence)",
+   "conformance": 0.0,
+   "cyclic": NaN,
+   "findings": "error = the independence assumption, sign flips with structure",
+   "grad_cos": NaN,
+   "grad_liveness": 1.0,
+   "mean_abs_err": 0.06177866270038054,
+   "phi": 0.9382213372996194,
+   "system": "ltn product real logic",
+   "version": "LTNtorch 1.0.2",
+   "via": "measured live (this battery); see conformance_ltn.md",
+   "worst_signed_err": 0.32222004869693677
+  },
+  {
+   "claimed": "Godel real logic (min-max evaluation)",
+   "conformance": 2.726424330745658e-08,
+   "cyclic": NaN,
+   "findings": "cross-semantics distance to WMC == the min-max row",
+   "grad_cos": NaN,
+   "grad_liveness": 0.15178571428571427,
+   "mean_abs_err": 0.0,
+   "phi": 1.0,
+   "system": "ltn Godel real logic",
+   "version": "LTNtorch 1.0.2",
+   "via": "measured live; conformant to its own claim (Godel property)",
+   "worst_signed_err": 0.0
   },
   {
    "claimed": "distribution semantics",

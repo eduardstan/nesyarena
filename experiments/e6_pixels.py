@@ -148,8 +148,8 @@ def cat_value(name, terms, PA, PB):
         order = torch.argsort(vals.detach(), dim=1, descending=True)[:, :k]  # frozen
         return vals.gather(1, order).sum(dim=1)
     if name in ("minmax", "ltn_godel"):
-         mins = torch.stack([torch.minimum(PA[:, i], PB[:, j]) for (i, j) in terms], dim=1)
-         return mins.amax(dim=1)
+        mins = torch.stack([torch.minimum(PA[:, i], PB[:, j]) for (i, j) in terms], dim=1)
+        return mins.amax(dim=1)
     if name == "ltn_product":
         acc = vals[:, 0]
         for j in range(1, vals.shape[1]):

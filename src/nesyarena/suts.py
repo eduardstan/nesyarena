@@ -175,12 +175,15 @@ class LSE(Provenance):
         return g
 
 
-def registry() -> list[Provenance]:
-    """The standard SUT lineup for sweeps and scorecards."""
+def registry(include_ltn: bool = False) -> list[Provenance]:
+    """The standard SUT lineup for sweeps and scorecards. The LTN
+    configurations (adapters/ltn.py) join only on request: they need the
+    LTNtorch package, and the core arena must run without any backend
+    installed."""
+    suts = [ExactWMC(), AddMult(clamp=True), TopK(1), TopK(3), MinMax()]
+    if include_ltn:
+        from .adapters.ltn import LTNGodel, LTNProduct
 
-    # return [ExactWMC(), AddMult(clamp=True), TopK(1), TopK(3), MinMax()]
-    from .ltn_provenance import LTNProdProvenance, LTNGodelProvenance
-    
-    return [ExactWMC(), AddMult(clamp=True), TopK(1), TopK(3), MinMax(),
-            LTNProdProvenance(), LTNGodelProvenance()]
+        suts += [LTNProduct(), LTNGodel()]
+    return suts
 

@@ -38,13 +38,14 @@ class MyAdapter:
 1. **No normalization.** The adapter reports what the backend computes. If
    the backend deviates from its claim, the adapter must deviate identically;
    a deviation is a *finding about the backend's deployed semantics*, logged
-   with the witnessing instance (see `out/conformance_scallop.md`, findings F-1 and F-3).
+   with the witnessing instance (see `out/conformance_scallop.md`, finding F-1, and
+   `out/finding_F2_deepproblog_on_deeplog.md`).
 2. **Shared inputs.** Oracle and backend consume the identical `(program,
    base)`; that isolation is what makes the error attributable to the
    reasoning layer.
 3. **Pin versions.** Record the backend version/commit in your findings;
    conformance verdicts are per-version. Pin deviations as canary tests that
-   flip when upstream changes (see the version-pinned conformance logs in `out/`).
+   flip when upstream changes (see `tests/test_deepproblog_adapter.py`).
 
 ## Worked examples in-tree
 
@@ -53,6 +54,7 @@ class MyAdapter:
 | `adapters/base.py::ReferenceAdapter` | in-process | wraps the reference SUTs; the idealized comparison point |
 | `adapters/scallop.py` | scallopy context | program compilation (EDB atoms via `fact/1`), native recursion, FD gradients |
 | `adapters/deeplog.py` | DeepLog circuits | DNF-level; constant labels for values, symbolic labels + autograd for gradients |
+| `adapters/deepproblog.py` | DeepLog's DeepProbLog layer | program text rendering; currently pins finding F-2 |
 
 ## Checklist before you claim conformance
 
@@ -63,3 +65,47 @@ class MyAdapter:
 - [ ] gradient battery on tie-free (heterogeneous) instances if
       `supports_grad`
 - [ ] version pinned; deviations logged + pinned as canaries, not fixed
+
+## Two integration routes: Provenance (DNF-level) vs Adapter (program-level)
+
+There are two ways to plug a backend in; pick by what the backend consumes.
+
+**Route 1 — Provenance (DNF-level).** If the backend evaluates a *formula*
+(a set of proofs over weighted facts) — like an aggregation strategy or a
+fuzzy-logic library — subclass `suts.Provenance`:
+
+```python
+from nesyarena.suts import Provenance
+
+class MySUT(Provenance):
+    name = "mylib:config"                 # colon convention: backend:config
+    claimed = "distribution semantics"    # picks the oracle you are scored on
+
+    def __init__(self):
+        import mylib                      # DEFERRED import — the arena must
+        self._ops = mylib.ops             # run without your backend installed
+
+    def value(self, proofs, probs): ...   # what the backend computes
+    def grad(self, proofs, probs): ...    # the backend's own gradients
+```
+
+Steps: (1) put the class in `adapters/<backend>.py` with deferred imports;
+(2) do **not** add it to the default `registry()` — extend the opt-in hook
+(`registry(include_...)`) so the core keeps running without your package;
+(3) add the batched torch op to `learning/structures.py` + a parity test in
+`tests/test_learning_parity.py` (values *and* gradients vs your class, on a
+tie-free instance, guarded by `pytest.importorskip`); (4) add the SUT key to
+the experiment configs you want it in, with a registered prediction comment;
+(5) conformance runner + `out/conformance_<backend>.md` + arena row, as in
+Route 2. Worked example: `adapters/ltn.py`.
+
+**Route 2 — Adapter (program-level).** If the backend consumes *programs*
+(rules + facts, possibly recursive), implement the `Adapter` protocol at the
+top of this document. Worked examples: `adapters/scallop.py` (native
+recursion), `adapters/problog_kbest.py` (the most readable template).
+
+If the backend's claimed semantics is not distribution semantics, override
+`oracle()` with the exact evaluation of *its* claim (see `LTNGodel`, whose
+oracle is the Gödel/min-max evaluation) and report the distance to other
+semantics separately as cross-semantics distance — conformance and
+cross-semantics gaps are different quantities.

@@ -103,10 +103,6 @@ def run(seeds=(0, 1, 2), epochs=6, n_train=3000, n_test=1500, batch=64, lr=1e-3)
                     PA = torch.softmax(net(XA_t), 1).clamp(EPS, 1.0).numpy()
                     PB = torch.softmax(net(XB_t), 1).clamp(EPS, 1.0).numpy()
                     vals = np.stack([PA[:, i] * PB[:, j] for (i, j) in TERMS_HE], 1)
-                    # vh = (vals.max(1) if name == "top1"
-                    #       else np.stack([np.minimum(PA[:, i], PB[:, j])
-                    #                      for (i, j) in TERMS_HE], 1).max(1)
-                    #       if name == "minmax" else vals.sum(1))
                     if name == "top1":
                         vh = vals.max(1)
                     elif name in ("minmax", "ltn_godel"):

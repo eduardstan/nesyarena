@@ -94,16 +94,28 @@ class BatchStructure:
         return per_proof.amax(dim=1)
 
     def ltn_prod(self, Pb: torch.Tensor) -> torch.Tensor:
-        """LTN, connettivi prodotto (fo.AndProd/fo.OrProbSum): per-proof AND
-        e' gia' il prodotto (== scores()); tra i proof si fa OR-prod in
-        sequenza: a `or` b = a + b - a*b. minmax() sopra e' gia', byte per
-        byte, la variante Godel (And=min, Or=max) -- nessun metodo separato
-        serve per quella."""
-        sc = self.scores(Pb)                      # (B, P) AND-prod per proof
-        acc = sc[:, 0]
-        for j in range(1, sc.shape[1]):
-            b = sc[:, j]
-            acc = acc + b - acc * b
+        """LTN product real logic, evaluated with the *deployed* LTNtorch
+        connectives (lazy import; only ltn_* SUT names need the package).
+        AndProd/OrProbSum are used with their deployed defaults — including
+        the stable=True input stabilization, which shifts values by ~1e-4
+        relative to pure product/probsum — so autograd through this op is
+        system-faithful by construction (parity-gated against
+        adapters/ltn.py). The Gödel configuration needs no separate op:
+        minmax() above is, by definition of the Gödel connectives
+        (And = min, Or = max), exactly its batched evaluation — hence the
+        ltn_godel dispatch alias in prov_value()."""
+        import ltn.fuzzy_ops as fuzzy_ops
+
+        and_op, or_op = fuzzy_ops.AndProd(), fuzzy_ops.OrProbSum()
+        proof_vals = []
+        for pi in self.pidx:
+            v = Pb[:, pi[0]]
+            for i in pi[1:]:
+                v = and_op(v, Pb[:, i])
+            proof_vals.append(v)
+        acc = proof_vals[0]
+        for v in proof_vals[1:]:
+            acc = or_op(acc, v)
         return acc
 
 
