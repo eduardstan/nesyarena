@@ -36,6 +36,15 @@ from nesyarena.suts import registry  # noqa: E402
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.environ.get("NESYARENA_OUT", os.path.join(HERE, "..", "out"))
 
+def _registry_with_ltn():
+    """Sweep runners include the LTN configurations when LTNtorch is
+    installed; the core registry default stays backend-free."""
+    try:
+        return registry(include_ltn=True)
+    except ImportError:
+        return registry()
+
+
 
 def load_config(path: str) -> tuple[dict, str]:
     with open(path, "rb") as fh:
@@ -125,7 +134,7 @@ def fig_f2(rows: list[dict], cfg: dict) -> str:
 
 def main(config_path: str) -> dict:
     cfg, cfg_hash = load_config(config_path)
-    suts = registry()
+    suts = _registry_with_ltn()
     rows, skipped = sweep(cfg, suts)
 
     by_sut = {}
