@@ -41,7 +41,9 @@ from nesyarena.learning import BatchStructure, prov_value  # noqa: E402
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.environ.get("NESYARENA_OUT", os.path.join(HERE, "..", "out"))
 SUT_K = {"exact": None, "addmult": None, "addmult_st": None,
-         "top1": 1, "top3": 3, "minmax": None}
+         "top1": 1, "top3": 3, "minmax": None,
+         "ltn_product": None, "ltn_godel": None}
+
 EPS = 1e-4
 
 
@@ -139,15 +141,22 @@ def cat_value(name, terms, PA, PB):
     top-k with k >= len(terms) retains every proof — exact by construction,
     computed through the top-k path so the identity is measured."""
     vals = torch.stack([PA[:, i] * PB[:, j] for (i, j) in terms], dim=1)
-    if name in ("exact", "addmult"):
+    if name in ("exact", "addmult", "addmult_st"):
         return vals.sum(dim=1)
     if name.startswith("top"):
         k = min(int(name[3:]), len(terms))
         order = torch.argsort(vals.detach(), dim=1, descending=True)[:, :k]  # frozen
         return vals.gather(1, order).sum(dim=1)
-    if name == "minmax":
-        mins = torch.stack([torch.minimum(PA[:, i], PB[:, j]) for (i, j) in terms], dim=1)
-        return mins.amax(dim=1)
+    if name in ("minmax", "ltn_godel"):
+         mins = torch.stack([torch.minimum(PA[:, i], PB[:, j]) for (i, j) in terms], dim=1)
+         return mins.amax(dim=1)
+    if name == "ltn_product":
+        acc = vals[:, 0]
+        for j in range(1, vals.shape[1]):
+            b = vals[:, j]
+            acc = acc + b - acc * b
+        return acc
+
     raise ValueError(name)
 
 

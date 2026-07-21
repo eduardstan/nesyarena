@@ -45,7 +45,7 @@ def test_clamp_blackout_in_autograd():
     p = torch.full((1, len(facts)), 0.9, dtype=torch.float64, requires_grad=True)
     v = prov_value("addmult", S, p)
     v.sum().backward()
-    assert float(v[0]) == 1.0
+    assert float(v[0].item()) == 1.0
     assert torch.all(p.grad == 0.0)
 
 

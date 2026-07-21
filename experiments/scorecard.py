@@ -37,7 +37,9 @@ OUT = os.environ.get("NESYARENA_OUT", os.path.join(HERE, "..", "out"))
 
 # E6 result keys per SUT name used in the learning experiments
 E6_KEY = {"exact-wmc": "exact", "add-mult(clamped)": "addmult",
-          "top-1-proofs": "top1", "top-3-proofs": "top3", "min-max-prob": "minmax"}
+          "top-1-proofs": "top1", "top-3-proofs": "top3", "min-max-prob": "minmax",
+          "ltn:product": "ltn_product", "ltn:godel": "ltn_godel"}
+
 
 
 def liveness_battery() -> dict[str, float]:

@@ -48,7 +48,7 @@ OUT = os.environ.get("NESYARENA_OUT", os.path.join(HERE, "..", "out"))
 DIGITS = [0, 1, 2]
 TERMS_TR = [(0, 2), (1, 1), (2, 0)]
 TERMS_HE = [(0, 0), (1, 1), (2, 2)]
-SUTS = ["exact", "top1", "minmax"]
+SUTS = ["exact", "top1", "minmax", "ltn_product", "ltn_godel"]
 ETAS = [0.0, 0.15, 0.3, 0.5]
 
 
@@ -103,10 +103,22 @@ def run(seeds=(0, 1, 2), epochs=6, n_train=3000, n_test=1500, batch=64, lr=1e-3)
                     PA = torch.softmax(net(XA_t), 1).clamp(EPS, 1.0).numpy()
                     PB = torch.softmax(net(XB_t), 1).clamp(EPS, 1.0).numpy()
                     vals = np.stack([PA[:, i] * PB[:, j] for (i, j) in TERMS_HE], 1)
-                    vh = (vals.max(1) if name == "top1"
-                          else np.stack([np.minimum(PA[:, i], PB[:, j])
-                                         for (i, j) in TERMS_HE], 1).max(1)
-                          if name == "minmax" else vals.sum(1))
+                    # vh = (vals.max(1) if name == "top1"
+                    #       else np.stack([np.minimum(PA[:, i], PB[:, j])
+                    #                      for (i, j) in TERMS_HE], 1).max(1)
+                    #       if name == "minmax" else vals.sum(1))
+                    if name == "top1":
+                        vh = vals.max(1)
+                    elif name in ("minmax", "ltn_godel"):
+                        vh = np.stack([np.minimum(PA[:, i], PB[:, j])
+                                       for (i, j) in TERMS_HE], 1).max(1)
+                    elif name == "ltn_product":
+                        vh = vals[:, 0]
+                        for j in range(1, vals.shape[1]):
+                            vh = vh + vals[:, j] - vh * vals[:, j]
+                    else:
+                        vh = vals.sum(1)
+
                     res[f"{name}@{eta}"]["trans"].append(
                         float(np.mean(np.abs(vh - truth_he))))
                     res[f"{name}@{eta}"]["cal"].append(
