@@ -16,6 +16,11 @@ treatment:
   structure: { P: 4, L: 3, c: 2 }
   held_queries: [[0],[1],[2],[3],[0,1,2]]
   # addmult_st per finding F-3; registered predictions as in E6_facttable
+  # ltn_* per the fuzzy axis (adapters/ltn.py). REGISTERED (before the
+  # integration rerun): ltn_product's signed error FLIPS with structure —
+  # positive (over-count) on overlap treatments, negative (under-count) on
+  # disjoint controls, both faces of the independence assumption;
+  # ltn_godel == minmax in value by the Gödel property (conformance check).
   suts: [exact, addmult, addmult_st, top1, top3, minmax, ltn_product, ltn_godel]
 control:
   pA_true: [0.5, 0.3, 0.2]

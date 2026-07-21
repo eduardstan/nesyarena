@@ -45,7 +45,7 @@ def test_clamp_blackout_in_autograd():
     p = torch.full((1, len(facts)), 0.9, dtype=torch.float64, requires_grad=True)
     v = prov_value("addmult", S, p)
     v.sum().backward()
-    assert float(v[0].item()) == 1.0
+    assert float(v.detach()[0]) == 1.0
     assert torch.all(p.grad == 0.0)
 
 
@@ -91,3 +91,41 @@ def test_straight_through_clamp_matches_f3_semantics():
     st = AddMultStraightThrough()
     assert st.value(inst.proofs, inst.probs) == 1.0
     assert st.grad(inst.proofs, inst.probs) == rg
+
+
+def test_ltn_batched_ops_match_deployed_fuzzy_ops():
+    """The batched ltn_prod op (and the minmax op serving as the Gödel
+    evaluation) must match the deployed LTNtorch connectives in
+    adapters/ltn.py — values and autograd gradients, on a tie-free
+    instance."""
+    ltn = pytest.importorskip("ltn")  # noqa: F841
+    from nesyarena.adapters.ltn import LTNGodel, LTNProduct
+
+    inst = overlap_family(4, 3, 2, 0.6, rng=np.random.default_rng(23), het=True)
+    facts = sorted(inst.probs, key=repr)
+    S = BatchStructure(inst.proofs, facts)
+    pv = np.array([inst.probs[f] for f in facts])
+    for name, ref in (("ltn_product", LTNProduct()), ("ltn_godel", LTNGodel())):
+        p = torch.tensor(pv[None, :], dtype=torch.float64, requires_grad=True)
+        v = prov_value(name, S, p)
+        v.sum().backward()
+        assert float(v.detach()[0]) == pytest.approx(
+            ref.value(inst.proofs, inst.probs), abs=1e-6), name
+        rg = ref.grad(inst.proofs, inst.probs)
+        for j, f in enumerate(facts):
+            assert float(p.grad[0, j]) == pytest.approx(rg[f], abs=1e-6), (name, f)
+
+
+def test_ltn_godel_conformance_and_cross_semantics():
+    """ltn:godel conforms to its Gödel claim (error ~0 vs the min-max
+    evaluation, its oracle) while its cross-semantics distance to WMC equals
+    the min-max reference's error — the provable-property framing."""
+    pytest.importorskip("ltn")
+    from nesyarena.adapters.ltn import LTNGodel
+    from nesyarena.suts import MinMax
+
+    inst = overlap_family(3, 3, 1, 0.6, rng=np.random.default_rng(29), het=True)
+    g = LTNGodel()
+    assert g.error(inst.proofs, inst.probs) == pytest.approx(0.0, abs=1e-6)
+    assert g.cross_semantics_error(inst.proofs, inst.probs) == pytest.approx(
+        MinMax().error(inst.proofs, inst.probs), abs=1e-6)

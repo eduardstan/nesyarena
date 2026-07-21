@@ -1,0 +1,369 @@
+{
+ "experiment": "conformance-ltn",
+ "ltntorch_version": "1.0.2",
+ "package_version": "0.1.0.dev0",
+ "rows": [
+  {
+   "c": 2,
+   "godel_conformance": 4.256337726715742e-09,
+   "godel_cross_semantics": 0.06960232584681764,
+   "id": "values-00",
+   "prod_err": 0.20074839918818727
+  },
+  {
+   "c": 1,
+   "godel_conformance": 2.384185793236071e-08,
+   "godel_cross_semantics": 0.0960000238418579,
+   "id": "values-01",
+   "prod_err": 0.08641535854339599
+  },
+  {
+   "c": 1,
+   "godel_conformance": -2.384185793236071e-08,
+   "godel_cross_semantics": 0.008999976158142076,
+   "id": "values-02",
+   "prod_err": 0.07287606859207152
+  },
+  {
+   "c": 2,
+   "godel_conformance": -2.5487540966651068e-08,
+   "godel_cross_semantics": 0.1333511992734427,
+   "id": "values-03",
+   "prod_err": 0.22471856320319122
+  },
+  {
+   "c": 0,
+   "godel_conformance": -2.384185793236071e-08,
+   "godel_cross_semantics": -0.09314102384185818,
+   "id": "values-04",
+   "prod_err": -2.515765762356459e-05
+  },
+  {
+   "c": 0,
+   "godel_conformance": 2.384185793236071e-08,
+   "godel_cross_semantics": 0.009600023841857985,
+   "id": "values-05",
+   "prod_err": 1.5358543396071234e-05
+  },
+  {
+   "c": 2,
+   "godel_conformance": 2.7041250905135428e-08,
+   "godel_cross_semantics": 0.1529568631614363,
+   "id": "values-06",
+   "prod_err": 0.05506821465145706
+  },
+  {
+   "c": 1,
+   "godel_conformance": 2.384185793236071e-08,
+   "godel_cross_semantics": 0.2457600238418579,
+   "id": "values-07",
+   "prod_err": 0.031198084602355958
+  },
+  {
+   "c": 0,
+   "godel_conformance": 2.384185793236071e-08,
+   "godel_cross_semantics": 0.009600023841857985,
+   "id": "values-08",
+   "prod_err": 1.5358543396071234e-05
+  },
+  {
+   "c": 1,
+   "godel_conformance": -1.6170424554928786e-08,
+   "godel_cross_semantics": 0.06055526340955919,
+   "id": "values-09",
+   "prod_err": 0.03319583738798326
+  },
+  {
+   "c": 2,
+   "godel_conformance": 1.1920928966180355e-08,
+   "godel_cross_semantics": 0.25410001192092896,
+   "id": "values-10",
+   "prod_err": 0.007455649113655094
+  },
+  {
+   "c": 1,
+   "godel_conformance": 2.384185793236071e-08,
+   "godel_cross_semantics": 0.15728642384185793,
+   "id": "values-11",
+   "prod_err": 0.07547648588790895
+  },
+  {
+   "c": 2,
+   "godel_conformance": -4.174600221062974e-09,
+   "godel_cross_semantics": 0.08826570847743909,
+   "id": "values-12",
+   "prod_err": 0.32222004869693677
+  },
+  {
+   "c": 0,
+   "godel_conformance": 1.1920928966180355e-08,
+   "godel_cross_semantics": 0.053571011920928974,
+   "id": "values-13",
+   "prod_err": 6.62915906906314e-05
+  },
+  {
+   "c": 2,
+   "godel_conformance": -2.384185793236071e-08,
+   "godel_cross_semantics": 0.09809997615814203,
+   "id": "values-14",
+   "prod_err": 0.12464192447662348
+  },
+  {
+   "c": 0,
+   "godel_conformance": -2.726424330745658e-08,
+   "godel_cross_semantics": -0.15061972036607918,
+   "id": "values-15",
+   "prod_err": 5.092725507560569e-05
+  },
+  {
+   "c": 2,
+   "godel_conformance": 2.384185793236071e-08,
+   "godel_cross_semantics": 0.26304002384185793,
+   "id": "values-16",
+   "prod_err": 0.18123008588790895
+  },
+  {
+   "c": 2,
+   "godel_conformance": 1.1920928966180355e-08,
+   "godel_cross_semantics": 0.24087001192092894,
+   "id": "values-17",
+   "prod_err": 0.01982103096961975
+  },
+  {
+   "c": 1,
+   "godel_conformance": -1.6132906566213023e-08,
+   "godel_cross_semantics": 0.034875279945804194,
+   "id": "values-18",
+   "prod_err": 0.06876630215115698
+  },
+  {
+   "c": 1,
+   "godel_conformance": -2.384185793236071e-08,
+   "godel_cross_semantics": 0.008999976158142076,
+   "id": "values-19",
+   "prod_err": 0.07287606859207152
+  },
+  {
+   "c": 0,
+   "godel_conformance": 2.384185793236071e-08,
+   "godel_cross_semantics": -0.13785597615814227,
+   "id": "values-20",
+   "prod_err": -2.3096138000666677e-05
+  },
+  {
+   "c": 0,
+   "godel_conformance": 1.9005491957990728e-08,
+   "godel_cross_semantics": -0.15479700514604655,
+   "id": "values-21",
+   "prod_err": -1.4948337574871573e-05
+  },
+  {
+   "c": 1,
+   "godel_conformance": 2.384185793236071e-08,
+   "godel_cross_semantics": 0.2457600238418579,
+   "id": "values-22",
+   "prod_err": 0.031198084602355958
+  },
+  {
+   "c": 1,
+   "godel_conformance": -2.384185793236071e-08,
+   "godel_cross_semantics": 0.008999976158142076,
+   "id": "values-23",
+   "prod_err": 0.07287606859207152
+  },
+  {
+   "c": 0,
+   "godel_conformance": -1.2431391915868062e-08,
+   "godel_cross_semantics": 0.1445934246397485,
+   "id": "values-24",
+   "prod_err": 8.846028809444961e-05
+  },
+  {
+   "c": 1,
+   "godel_conformance": 1.1920928966180355e-08,
+   "godel_cross_semantics": 0.14700001192092896,
+   "id": "values-25",
+   "prod_err": 0.01896004092693329
+  },
+  {
+   "c": 0,
+   "godel_conformance": -2.384185793236071e-08,
+   "godel_cross_semantics": -0.09460644336085822,
+   "id": "values-26",
+   "prod_err": -3.5985425524964754e-05
+  },
+  {
+   "c": 0,
+   "godel_conformance": -1.0322377508309444e-08,
+   "godel_cross_semantics": -0.1589937773406087,
+   "id": "values-27",
+   "prod_err": -7.742316122638648e-05
+  },
+  {
+   "c": 0,
+   "godel_conformance": 1.1920928966180355e-08,
+   "godel_cross_semantics": 0.053571011920928974,
+   "id": "values-28",
+   "prod_err": 6.62915906906314e-05
+  },
+  {
+   "c": 0,
+   "godel_conformance": 1.1920928966180355e-08,
+   "godel_cross_semantics": 0.12810001192092896,
+   "id": "values-29",
+   "prod_err": 6.004092693329133e-05
+  },
+  {
+   "c": 1,
+   "godel_conformance": -1.4227209632622362e-08,
+   "godel_cross_semantics": 0.017266897150722604,
+   "id": "values-30",
+   "prod_err": 0.15239402432128535
+  },
+  {
+   "c": 2,
+   "godel_conformance": -2.384185793236071e-08,
+   "godel_cross_semantics": 0.09809997615814203,
+   "id": "values-31",
+   "prod_err": 0.12464192447662348
+  },
+  {
+   "c": 1,
+   "godel_conformance": -2.384185793236071e-08,
+   "godel_cross_semantics": 0.0011728651581417449,
+   "id": "values-32",
+   "prod_err": 0.095743323093475
+  },
+  {
+   "c": 1,
+   "godel_conformance": -2.260440334911351e-09,
+   "godel_cross_semantics": 0.06215715996978699,
+   "id": "values-33",
+   "prod_err": 0.13026393048522888
+  },
+  {
+   "c": 0,
+   "godel_conformance": -2.384185793236071e-08,
+   "godel_cross_semantics": -0.09869681384185813,
+   "id": "values-34",
+   "prod_err": -2.412583450339678e-05
+  },
+  {
+   "c": 1,
+   "godel_conformance": 1.1920928966180355e-08,
+   "godel_cross_semantics": 0.10290001192092896,
+   "id": "values-35",
+   "prod_err": 0.049395291590690615
+  },
+  {
+   "c": 2,
+   "godel_conformance": -3.0929381278355095e-09,
+   "godel_cross_semantics": 0.12626257020401377,
+   "id": "values-36",
+   "prod_err": 0.185314948143238
+  },
+  {
+   "c": 1,
+   "godel_conformance": -2.384185793236071e-08,
+   "godel_cross_semantics": 0.0008999761581419685,
+   "id": "values-37",
+   "prod_err": 0.09401584234237659
+  },
+  {
+   "c": 2,
+   "godel_conformance": -2.384185793236071e-08,
+   "godel_cross_semantics": 0.09809997615814203,
+   "id": "values-38",
+   "prod_err": 0.12464192447662348
+  },
+  {
+   "c": 1,
+   "godel_conformance": -7.981118543831656e-09,
+   "godel_cross_semantics": 0.06592105649360513,
+   "id": "values-39",
+   "prod_err": 0.12923465989478922
+  },
+  {
+   "c": 0,
+   "godel_conformance": 2.384185793236071e-08,
+   "godel_cross_semantics": -0.13785597615814227,
+   "id": "values-40",
+   "prod_err": -2.3096138000666677e-05
+  },
+  {
+   "c": 0,
+   "godel_conformance": 1.1920928966180355e-08,
+   "godel_cross_semantics": 0.19629581136192903,
+   "id": "values-41",
+   "prod_err": 0.0001475350328884878
+  },
+  {
+   "c": 1,
+   "godel_conformance": -5.48981349268729e-09,
+   "godel_cross_semantics": 0.049146146602378926,
+   "id": "values-42",
+   "prod_err": 0.11299458248113259
+  },
+  {
+   "c": 0,
+   "godel_conformance": -2.384185793236071e-08,
+   "godel_cross_semantics": -0.09869681384185813,
+   "id": "values-43",
+   "prod_err": -2.412583450339678e-05
+  },
+  {
+   "c": 1,
+   "godel_conformance": 1.1920928966180355e-08,
+   "godel_cross_semantics": 0.10290001192092896,
+   "id": "values-44",
+   "prod_err": 0.049395291590690615
+  },
+  {
+   "c": 1,
+   "godel_conformance": 2.568586232598591e-09,
+   "godel_cross_semantics": 0.03241463381502396,
+   "id": "values-45",
+   "prod_err": 0.05397047478410966
+  },
+  {
+   "c": 0,
+   "godel_conformance": 2.384185793236071e-08,
+   "godel_cross_semantics": 0.009600023841857985,
+   "id": "values-46",
+   "prod_err": 1.5358543396071234e-05
+  },
+  {
+   "c": 1,
+   "godel_conformance": 1.1920928966180355e-08,
+   "godel_cross_semantics": 0.07203001192092898,
+   "id": "values-47",
+   "prod_err": 0.08634314349174502
+  },
+  {
+   "c": 0,
+   "godel_conformance": 2.4002988374682843e-08,
+   "godel_cross_semantics": -0.1982718279169401,
+   "id": "values-48",
+   "prod_err": -4.394553168618476e-05
+  },
+  {
+   "c": 0,
+   "godel_conformance": -2.384185793236071e-08,
+   "godel_cross_semantics": -0.063900023841858,
+   "id": "values-49",
+   "prod_err": -2.3931407928556858e-05
+  }
+ ],
+ "verdict": {
+  "P1_disjoint_exact": "19/19",
+  "P1_overlap_positive": "31/31",
+  "P2_godel_conformance": "50/50",
+  "P3_godel_onehot_tiefree": "10/10",
+  "liveness_tiefree": {
+   "godel": 0.15178571428571427,
+   "product": 1.0
+  },
+  "phi_product_vs_wmc": 0.9382213372996194,
+  "worst_prod_err": 0.32222004869693677
+ }
+}

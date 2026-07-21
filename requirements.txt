@@ -30,6 +30,7 @@ torchvision==0.27.0+cpu
 pydeeplog==3.0.3        # DeepLog (ML-KULeuven); pulls klaycircuits + lark
 deepproblog==2.0.6      # original DeepProbLog (ExactEngine; ApproximateEngine
                         # additionally needs SWI-Prolog + PySwip, not included)
+LTNtorch==1.0.2         # Logic Tensor Networks (the fuzzy axis; import name: ltn)
 
 # dev
 pytest==9.0.3

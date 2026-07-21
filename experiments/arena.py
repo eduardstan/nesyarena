@@ -166,6 +166,30 @@ def main():
         conformance=0.0, via="measured live (this battery); see conformance_deepproblog.md",
         findings="—"))
 
+    # ---- LTN (LTNtorch 1.0.2) — the fuzzy axis, measured live ---------------
+    lt = json.load(open(os.path.join(OUT, "conformance_ltn.json")))
+    lt_errs = [r["prod_err"] for r in lt["rows"]]
+    lt_live = lt["verdict"]["liveness_tiefree"]
+    rows.append(dict(
+        system="ltn product real logic", version="LTNtorch 1.0.2",
+        claimed="distribution semantics (independence)",
+        phi=1.0 - float(np.mean(np.abs(lt_errs))),
+        mean_abs_err=float(np.mean(np.abs(lt_errs))),
+        worst_signed_err=float(max(lt_errs, key=abs)),
+        grad_cos=math.nan, grad_liveness=lt_live["product"],
+        cyclic=math.nan, conformance=0.0,
+        via="measured live (this battery); see conformance_ltn.md",
+        findings="error = the independence assumption, sign flips with structure"))
+    rows.append(dict(
+        system="ltn Godel real logic", version="LTNtorch 1.0.2",
+        claimed="Godel real logic (min-max evaluation)",
+        phi=1.0, mean_abs_err=0.0, worst_signed_err=0.0,
+        grad_cos=math.nan, grad_liveness=lt_live["godel"],
+        cyclic=math.nan, conformance=max(abs(r["godel_conformance"])
+                                         for r in lt["rows"]),
+        via="measured live; conformant to its own claim (Godel property)",
+        findings="cross-semantics distance to WMC == the min-max row"))
+
     # ---- DeepLog (pydeeplog 3.0.3) — exact circuits -------------------------
     rows.append(dict(
         system="deeplog exact circuits", version="pydeeplog 3.0.3",
@@ -200,7 +224,7 @@ def main():
     for r in sorted(rows, key=lambda r: -r["phi"]):
         L.append(f"| {r['system']} | {r['version']} | **{r['phi']:.3f}** "
                  f"| {r['worst_signed_err']:+.3f} | {num(r['grad_cos'])} "
-                 f"| {num(r['grad_liveness'])} | {r['cyclic']:.3f} "
+                 f"| {num(r['grad_liveness'])} | {num(r['cyclic'])} "
                  f"| {r['conformance']:.1e} | {r['findings']} |")
     L += [
         "",
