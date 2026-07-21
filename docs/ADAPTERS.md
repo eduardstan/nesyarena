@@ -38,14 +38,14 @@ class MyAdapter:
 1. **No normalization.** The adapter reports what the backend computes. If
    the backend deviates from its claim, the adapter must deviate identically;
    a deviation is a *finding about the backend's deployed semantics*, logged
-   with the witnessing instance (see `out/conformance_scallop.md`, finding F-1, and
-   `out/finding_F2_deepproblog_on_deeplog.md`).
+   with the witnessing instance (see `out/conformance_scallop.md`, findings F-1 and F-3, and
+   `out/conformance_ltn.md`).
 2. **Shared inputs.** Oracle and backend consume the identical `(program,
    base)`; that isolation is what makes the error attributable to the
    reasoning layer.
 3. **Pin versions.** Record the backend version/commit in your findings;
    conformance verdicts are per-version. Pin deviations as canary tests that
-   flip when upstream changes (see `tests/test_deepproblog_adapter.py`).
+   flip when upstream changes (see the version-pinned conformance logs in `out/`).
 
 ## Worked examples in-tree
 
