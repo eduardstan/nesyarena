@@ -69,7 +69,7 @@ An earlier finite-difference campaign agreed to 7.9e-12 on the same
 instances away from the clamp region — which it deliberately skipped;
 the torch-tag route measures it:
 
-## D. Finding F-3 — diffaddmultprob's clamp is straight-through
+## D. Finding F-2 — diffaddmultprob's clamp is straight-through
 
 On **all 22** frozen instances whose raw proof-sum exceeds 1:
 

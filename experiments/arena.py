@@ -22,7 +22,7 @@ Deployed rows are populated from live measurements where cheap (ProbLog
 k-best runs in-process) and from the *validated models* elsewhere (Scallop
 rows use the reference SUTs, validated to ~2e-16 on this same battery;
 Scallop's diffaddmultprob gradient uses the straight-through model validated
-to 4.8e-08 — finding F-3). The provenance of every number is in the
+to 4.8e-08 — finding F-2). The provenance of every number is in the
 `measured via` column. Writes out/ARENA.md and out/ARENA.json.
 """
 
@@ -96,15 +96,15 @@ def main():
                     "minmaxprob": sc["values"]["scallop:minmaxprob"]["vs_reference"],
                     "topkproofs(k=1)": sc["values"]["scallop:topkproofs(k=1)"]["vs_reference"],
                     "topkproofs(k=3)": sc["values"]["scallop:topkproofs(k=3)"]["vs_reference"]}
-    raw = AddMult(clamp=False)  # F-3: deployed diff gradient = unclamped sum
+    raw = AddMult(clamp=False)  # F-2: deployed diff gradient = unclamped sum
     tk1, tk3, mm = TopK(1), TopK(3), MinMax()
     st_dev = max(r["vs_unclamped_grad"] for r in sc["gradients"]["saturation"])
     for label, sut, gfn, conf, findings, via in [
         ("scallop addmultprob", AddMult(clamp=True),
          lambda i: raw.grad(i.proofs, i.probs),
          max(scallop_conf["addmultprob"], st_dev),
-         "F-1 (recursion), F-3 (straight-through clamp)",
-         "reference model (values 2.2e-16); F-3 grad model (4.8e-08)"),
+         "F-1 (recursion), F-2 (straight-through clamp)",
+         "reference model (values 2.2e-16); F-2 grad model (4.8e-08)"),
         ("scallop topkproofs k=1", tk1,
          lambda i, s=tk1: s.grad(i.proofs, i.probs),
          max(scallop_conf["topkproofs(k=1)"],
@@ -258,7 +258,7 @@ def main():
         "",
         "Reference (idealized) SUT rows are omitted: after validation they are",
         "numerically identical to the deployed rows they model. Per-framework",
-        "detail and findings: `conformance_scallop.md` (F-1, F-3),",
+        "detail and findings: `conformance_scallop.md` (F-1, F-2),",
         "`conformance_deeplog.md`, `conformance_problog_kbest.md`.",
         "Learning-consequence results (calibration, transfer): `RESULTS.md`.",
     ]

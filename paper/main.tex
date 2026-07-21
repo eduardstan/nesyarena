@@ -852,6 +852,7 @@ H-N/P1 & top-1 advantage decays monotonically with noise & registered & \textbf{
 knife-edge collapse\\
 H-N/P2 & ranking reverses by $\eta = 0.5$ & registered & \statusgood{confirmed} (E5b)\\
 F-1 & (discovered) addmultprob: tuple-fixpoint truncation & --- & \statusgood{measured + probed}\\
+F-2 & (discovered) diffaddmultprob: straight-through clamp & --- & \statusgood{measured + confirmed}\\
 \bottomrule
 \end{tabular}
 \end{center}
@@ -1042,7 +1043,7 @@ $k$; $n$ & chain length (E8) / top-$k$ size; unrolling budget\\
 Every experiment is a committed YAML config whose sha256 is embedded in its JSON output; figures
 regenerate from the JSONs; \texttt{out/RESULTS.md} is auto-generated. Version pins for the
 deployed systems are recorded in the conformance logs (\texttt{out/conformance\_scallop.md},
-\texttt{out/conformance\_deeplog.md}, \texttt{out/finding\_F2\_*.md}). The frozen first
+\texttt{out/conformance\_deeplog.md}, \texttt{out/conformance\_problog\_kbest.md}, \texttt{out/conformance\_deepproblog.md}, \texttt{out/conformance\_ltn.md}). The frozen first
 implementation lives under \texttt{legacy/} with the golden parity fixtures under
 \texttt{tests/fixtures/}.
 

@@ -81,7 +81,7 @@ class AddMult(Provenance):
 
 
 class AddMultStraightThrough(Provenance):
-    """Deployed-faithful clamp per finding F-3 (Scallop diffaddmultprob):
+    """Deployed-faithful clamp per finding F-2 (Scallop diffaddmultprob):
     the VALUE is the clamped proof-sum min(1, sum_j s_j), but the GRADIENT is
     that of the UNCLAMPED sum — validated against deployed torch-tag autograd
     to 4.8e-08 on the frozen saturation battery. The (value, gradient) pair is

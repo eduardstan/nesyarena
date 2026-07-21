@@ -72,7 +72,7 @@ class BatchStructure:
         return self.scores(Pb).sum(dim=1).clamp(max=1.0)
 
     def addmult_st(self, Pb: torch.Tensor) -> torch.Tensor:
-        """Straight-through clamp (finding F-3): forward value is the clamped
+        """Straight-through clamp (finding F-2): forward value is the clamped
         sum, backward is the identity on the raw sum — the deployed
         diffaddmultprob differentiation semantics."""
         raw = self.scores(Pb).sum(dim=1)
