@@ -43,7 +43,9 @@ from nesyarena.oracle import wmc  # noqa: E402
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.environ.get("NESYARENA_OUT", os.path.join(HERE, "..", "out"))
 SUT_K = {"exact": None, "addmult": None, "addmult_st": None,
-         "top1": 1, "top3": 3, "minmax": None}
+         "top1": 1, "top3": 3, "minmax": None,
+         "ltn_product": None, "ltn_godel": None}
+
 EPS = 1e-4
 
 
@@ -97,6 +99,7 @@ def run_treatment(cfg):
             res[name]["facts_q"].append(float(np.mean(fq)))
             res[name]["fact_mae"].append(
                 float(np.mean([abs(learned[f] - q_true[f]) for f in q_true])))
+            print(f"  [treatment seed {seed}] {name} done")
     return res
 
 
@@ -104,16 +107,30 @@ def run_treatment(cfg):
 
 def cat_value(name, terms, pA, pB, k):
     """Disjoint categorical sum. exact and addmult share one path: on
-    mutually exclusive proofs add-mult IS distribution semantics (H9)."""
+    mutually exclusive proofs add-mult IS distribution semantics (H9).
+    ltn_product does NOT join that identity: its Or-prod (a+b-ab) assumes
+    INDEPENDENCE, not mutual exclusivity, so on this disjoint control it
+    systematically UNDER-estimates (opposite bias from the G1 overlap
+    treatment, where it over-estimates by assuming independence where
+    facts are actually shared/correlated). Genuinely different failure
+    mode, not a bug -- report it, don't "fix" it.
+    ltn_godel is byte-identical to minmax by definition (And=min, Or=max)."""
+
     vals = torch.stack([pA[i] * pB[j] for (i, j) in terms])
     if name in ("exact", "addmult", "addmult_st"):  # disjoint: no clamp active
         return vals.sum()
     if name.startswith("top"):
         order = torch.argsort(vals.detach(), descending=True)[:k]  # frozen
         return vals[order].sum()
-    if name == "minmax":
-        mins = torch.stack([torch.minimum(pA[i], pB[j]) for (i, j) in terms])
-        return mins.amax()
+    if name in ("minmax", "ltn_godel"):
+         mins = torch.stack([torch.minimum(pA[i], pB[j]) for (i, j) in terms])
+         return mins.amax()
+    if name == "ltn_product":
+        acc = vals[0]
+        for v in vals[1:]:
+            acc = acc + v - acc * v
+        return acc
+
     raise ValueError(name)
 
 
@@ -145,6 +162,7 @@ def run_control(cfg):
                 pA, pB = torch.softmax(th[:dom], 0), torch.softmax(th[dom:], 0)
                 v = float(cat_value(name, diag, pA, pB, k))
             res[name]["trans"].append(abs(v - truth_diag))
+            print(f"  [treatment seed {seed}] {name} done")
     return res
 
 

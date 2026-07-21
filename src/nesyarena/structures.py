@@ -94,6 +94,7 @@ class BatchStructure:
         return per_proof.amax(dim=1)
 
 
+
 def prov_value(name: str, S: BatchStructure, Pb: torch.Tensor,
                k: int | None = None) -> torch.Tensor:
     if name == "exact":

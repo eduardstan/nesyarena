@@ -177,4 +177,10 @@ class LSE(Provenance):
 
 def registry() -> list[Provenance]:
     """The standard SUT lineup for sweeps and scorecards."""
-    return [ExactWMC(), AddMult(clamp=True), TopK(1), TopK(3), MinMax()]
+
+    # return [ExactWMC(), AddMult(clamp=True), TopK(1), TopK(3), MinMax()]
+    from .ltn_provenance import LTNProdProvenance, LTNGodelProvenance
+    
+    return [ExactWMC(), AddMult(clamp=True), TopK(1), TopK(3), MinMax(),
+            LTNProdProvenance(), LTNGodelProvenance()]
+
