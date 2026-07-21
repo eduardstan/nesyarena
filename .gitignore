@@ -17,4 +17,6 @@ venv/
 *.bbl
 *.blg
 .data/
-*.toc
+
+# ProbLog MaxSAT side-effect log (written to cwd by the wpmsz solver)
+resulttable

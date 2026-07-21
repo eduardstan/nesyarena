@@ -44,6 +44,7 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt  # noqa: E402
 
 import nesyarena  # noqa: E402
+from experiments.palette import truncation_color  # noqa: E402
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.environ.get("NESYARENA_OUT", os.path.join(HERE, "..", "out"))
@@ -113,6 +114,29 @@ def compose_batch(chains, U, T, budget):
     return torch.stack(out)
 
 
+def fig_f11(summary, cfg):
+    fig, ax = plt.subplots(figsize=(6.8, 3.8), constrained_layout=True)
+    for b in cfg["budgets"]:
+        ks = cfg["test_k"]
+        d = summary[str(b)]  # inner keys are ints in-process, strings from JSON
+        mu = [d.get(k, d.get(str(k)))[0] for k in ks]
+        sd = [d.get(k, d.get(str(k)))[1] for k in ks]
+        label = "convergent" if b == "convergent" else f"budget n={b}"
+        ax.errorbar(ks, mu, yerr=sd, fmt="o-", ms=4,
+                    color=truncation_color(b), label=label)
+        if b != "convergent":
+            ax.axvline(int(b) + 1, ls=":", lw=0.8, color="gray")
+    ax.axhline(1 / len(RELS), color="k", lw=0.7, ls=":", label="chance (1/10)")
+    ax.set_xlabel("test chain length k (trained on k ∈ {2, 3})")
+    ax.set_ylabel("endpoint-relation accuracy")
+    ax.set_title("CLUTRR-style generalization: cliffs at the depth horizon k = n+1",
+                 fontsize=10)
+    ax.legend(fontsize=8)
+    ax.grid(alpha=0.3)
+    fig.savefig(os.path.join(OUT, "F11_clutrr.png"), dpi=160)
+    plt.close(fig)
+
+
 def main(config_path):
     cfg, cfg_hash = load_config(config_path)
     acc = {str(b): {k: [] for k in cfg["test_k"]} for b in cfg["budgets"]}
@@ -173,24 +197,7 @@ def main(config_path):
                        accuracy=summary, first_k_below_chance_plus=cliffs),
                   fh, indent=1, sort_keys=True)
 
-    fig, ax = plt.subplots(figsize=(6.8, 3.8), constrained_layout=True)
-    for b in cfg["budgets"]:
-        ks = cfg["test_k"]
-        mu = [summary[str(b)][k][0] for k in ks]
-        sd = [summary[str(b)][k][1] for k in ks]
-        label = "convergent" if b == "convergent" else f"budget n={b}"
-        ax.errorbar(ks, mu, yerr=sd, fmt="o-", ms=4, label=label)
-        if b != "convergent":
-            ax.axvline(int(b) + 1, ls=":", lw=0.8, color="gray")
-    ax.axhline(1 / len(RELS), color="k", lw=0.7, ls=":", label="chance (1/10)")
-    ax.set_xlabel("test chain length k (trained on k ∈ {2, 3})")
-    ax.set_ylabel("endpoint-relation accuracy")
-    ax.set_title("CLUTRR-style generalization: cliffs at the depth horizon k = n+1",
-                 fontsize=10)
-    ax.legend(fontsize=8)
-    ax.grid(alpha=0.3)
-    fig.savefig(os.path.join(OUT, "F11_clutrr.png"), dpi=160)
-    plt.close(fig)
+    fig_f11(summary, cfg)
 
     print(f"learned-table accuracy: {np.mean(table_acc):.3f} ± {np.std(table_acc):.3f}")
     for b in cfg["budgets"]:

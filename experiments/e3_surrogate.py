@@ -26,6 +26,7 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt  # noqa: E402
 
 import nesyarena  # noqa: E402
+from experiments.palette import sequential  # noqa: E402
 from nesyarena.generators import surrogate_scores  # noqa: E402
 from nesyarena.suts import LSE  # noqa: E402
 
@@ -70,14 +71,17 @@ def sweep(cfg):
 
 def fig_f4(rows, cfg):
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(8.6, 3.2), constrained_layout=True)
+    pal = sequential(cfg["figures"]["F4"]["P_show"])
     for P in cfg["figures"]["F4"]["P_show"]:
         eq = sorted([(r["tau"], r["bias"]) for r in rows
                      if r["P"] == P and r["family"] == "equal"])
-        ax1.plot([t for t, _ in eq], [b for _, b in eq], "o-", ms=3, label=f"P={P}")
+        ax1.plot([t for t, _ in eq], [b for _, b in eq], "o-", ms=3,
+                 color=pal[P], label=f"P={P}")
         ax1.plot([t for t, _ in eq], [t * math.log(P) for t, _ in eq], "k--", lw=0.7)
         pt = sorted([(r["tau"], r["bias"], r["share"]) for r in rows
                      if r["P"] == P and r["family"] == "perturbed"])
-        ax2.plot([b for _, b, _ in pt], [s for _, _, s in pt], "o-", ms=3, label=f"P={P}")
+        ax2.plot([b for _, b, _ in pt], [s for _, _, s in pt], "o-", ms=3,
+                 color=pal[P], label=f"P={P}")
     ax1.set_xscale("log")
     ax1.set_xlabel(r"temperature $\tau$")
     ax1.set_ylabel("bias  LSE$_\\tau$ $-$ max")

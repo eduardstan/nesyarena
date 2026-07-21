@@ -41,6 +41,7 @@ import matplotlib.pyplot as plt  # noqa: E402
 
 import nesyarena  # noqa: E402
 from experiments.e5_mnist import EPS, bce, cat_value, make_net, mnist_arrays  # noqa: E402
+from experiments.palette import sut_color  # noqa: E402
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.environ.get("NESYARENA_OUT", os.path.join(HERE, "..", "out"))
@@ -123,6 +124,27 @@ def run(seeds=(0, 1, 2), epochs=6, n_train=3000, n_test=1500, batch=64, lr=1e-3)
     return res
 
 
+def fig_f10(summary):
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(8.8, 3.4), constrained_layout=True)
+    for n in SUTS:
+        ax1.errorbar(ETAS, [summary[f"{n}@{e}"]["trans"][0] for e in ETAS],
+                     yerr=[summary[f"{n}@{e}"]["trans"][1] for e in ETAS],
+                     fmt="o-", ms=4, color=sut_color(n), label=n)
+        ax2.errorbar(ETAS, [summary[f"{n}@{e}"]["cal"][0] for e in ETAS],
+                     yerr=[summary[f"{n}@{e}"]["cal"][1] for e in ETAS],
+                     fmt="o-", ms=4, color=sut_color(n), label=n)
+    ax1.set_xlabel(r"latent label noise $\eta$")
+    ax1.set_ylabel("transfer error vs closed-form truth")
+    ax1.set_title("Transfer vs posterior determinism", fontsize=9)
+    ax2.set_xlabel(r"latent label noise $\eta$")
+    ax2.set_ylabel("percept calibration vs true posterior")
+    ax2.set_title("Calibration", fontsize=9)
+    ax1.legend(fontsize=8)
+    ax2.legend(fontsize=8)
+    fig.savefig(os.path.join(OUT, "F10_noise_ablation.png"), dpi=160)
+    plt.close(fig)
+
+
 def main():
     res = run()
     summary = {k: dict(trans=[float(np.mean(v["trans"])), float(np.std(v["trans"]))],
@@ -142,24 +164,7 @@ def main():
                                                "P2 reversal at eta=0.5",
                                                "P3 anchor at eta=0"],
                        verdict=verdict, summary=summary), fh, indent=1, sort_keys=True)
-    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(8.8, 3.4), constrained_layout=True)
-    for n in SUTS:
-        ax1.errorbar(ETAS, [summary[f"{n}@{e}"]["trans"][0] for e in ETAS],
-                     yerr=[summary[f"{n}@{e}"]["trans"][1] for e in ETAS],
-                     fmt="o-", ms=4, label=n)
-        ax2.errorbar(ETAS, [summary[f"{n}@{e}"]["cal"][0] for e in ETAS],
-                     yerr=[summary[f"{n}@{e}"]["cal"][1] for e in ETAS],
-                     fmt="o-", ms=4, label=n)
-    ax1.set_xlabel(r"latent label noise $\eta$")
-    ax1.set_ylabel("transfer error vs closed-form truth")
-    ax1.set_title("Transfer vs posterior determinism", fontsize=9)
-    ax2.set_xlabel(r"latent label noise $\eta$")
-    ax2.set_ylabel("percept calibration vs true posterior")
-    ax2.set_title("Calibration", fontsize=9)
-    ax1.legend(fontsize=8)
-    ax2.legend(fontsize=8)
-    fig.savefig(os.path.join(OUT, "F10_noise_ablation.png"), dpi=160)
-    plt.close(fig)
+    fig_f10(summary)
     print("advantage(exact - top1) by eta:", {k: round(v, 3) for k, v in adv.items()})
     print("P1 monotone decrease:", verdict["P1_monotone_decrease"],
           "| P2 reversal at 0.5:", verdict["P2_reversal_at_05"])

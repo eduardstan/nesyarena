@@ -19,6 +19,7 @@ from __future__ import annotations
 
 import json
 import os
+import re
 
 import matplotlib
 import numpy as np
@@ -29,6 +30,7 @@ import matplotlib.pyplot as plt  # noqa: E402
 
 import nesyarena  # noqa: E402
 from experiments.e6_pixels import make_mlp  # noqa: E402
+from experiments.palette import truncation_color  # noqa: E402
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.environ.get("NESYARENA_OUT", os.path.join(HERE, "..", "out"))
@@ -89,20 +91,16 @@ def run(seeds=(0, 1, 2, 3, 4), epochs=20, n_train=3000, batch=64, lr=2e-3):
     return curves
 
 
-def main():
-    curves = run()
-    final = {m: [float(np.mean([h[-1] for h in cs])), float(np.std([h[-1] for h in cs]))]
-             for m, cs in curves.items()}
-    os.makedirs(OUT, exist_ok=True)
-    with open(os.path.join(OUT, "E7_results.json"), "w") as fh:
-        json.dump(dict(experiment="E7", package_version=nesyarena.__version__,
-                       final_auc=final, curves=curves), fh, indent=1, sort_keys=True)
+def fig_f8(curves):
     fig, ax = plt.subplots(figsize=(6.6, 3.8), constrained_layout=True)
     for mode in curves:
         H = np.array(curves[mode])
-        ax.plot(range(1, H.shape[1] + 1), H.mean(0), "-o", ms=3, label=mode)
+        m = re.search(r"n=(\d+)", mode)
+        c = truncation_color(m.group(1) if m else "convergent")
+        ax.plot(range(1, H.shape[1] + 1), H.mean(0), "-o", ms=3, color=c,
+                label=mode)
         ax.fill_between(range(1, H.shape[1] + 1), H.mean(0) - H.std(0),
-                        H.mean(0) + H.std(0), alpha=0.15)
+                        H.mean(0) + H.std(0), color=c, alpha=0.15)
     ax.axhline(0.5, color="k", lw=0.7, ls=":")
     ax.set_xlabel("epoch")
     ax.set_ylabel("test AUC (chain query, depth 6)")
@@ -111,6 +109,17 @@ def main():
     ax.legend(fontsize=8)
     fig.savefig(os.path.join(OUT, "F8_depth_learning.png"), dpi=160)
     plt.close(fig)
+
+
+def main():
+    curves = run()
+    final = {m: [float(np.mean([h[-1] for h in cs])), float(np.std([h[-1] for h in cs]))]
+             for m, cs in curves.items()}
+    os.makedirs(OUT, exist_ok=True)
+    with open(os.path.join(OUT, "E7_results.json"), "w") as fh:
+        json.dump(dict(experiment="E7", package_version=nesyarena.__version__,
+                       final_auc=final, curves=curves), fh, indent=1, sort_keys=True)
+    fig_f8(curves)
     print("E7 final AUC:", {m: f"{v[0]:.3f} ± {v[1]:.3f}" for m, v in final.items()})
     return final
 
