@@ -14,11 +14,11 @@ hidden: 128
 treatment:
   grid: 3
   held_queries: [[0],[2],[5],[0,1,2],[3,4,5]]   # subsets of the 6 path-proofs
-  suts: [exact, addmult, top1, top3, minmax]
+  suts: [exact, addmult, top1, top3, minmax, ltn_product, ltn_godel]
 control:
   digits: [0, 1, 2]
   train_terms: [[0,2],[1,1],[2,0]]
   held_terms: [[0,0],[1,1],[2,2]]
   # top3 has k >= P here (3 mutually exclusive proofs): predicted identical
   # to exact — included so the identity is measured, not asserted
-  suts: [exact, addmult, top1, top3, minmax]
+  suts: [exact, addmult, top1, top3, minmax, ltn_product, ltn_godel]
