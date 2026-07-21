@@ -15,7 +15,7 @@ hidden: 16
 treatment:
   structure: { P: 4, L: 3, c: 2 }
   held_queries: [[0],[1],[2],[3],[0,1,2]]
-  # addmult_st per finding F-3; registered predictions as in E6_facttable
+  # addmult_st per finding F-2; registered predictions as in E6_facttable
   # ltn_* per the fuzzy axis (adapters/ltn.py). REGISTERED (before the
   # integration rerun): ltn_product's signed error FLIPS with structure —
   # positive (over-count) on overlap treatments, negative (under-count) on

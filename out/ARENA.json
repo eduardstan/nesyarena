@@ -20,15 +20,15 @@
    "claimed": "distribution semantics",
    "conformance": 4.768371586472142e-08,
    "cyclic": 0.7200000000000001,
-   "findings": "F-1 (recursion), F-3 (straight-through clamp)",
+   "findings": "F-1 (recursion), F-2 (straight-through clamp)",
    "grad_cos": 0.9795814343313994,
    "grad_liveness": 1.0,
    "mean_abs_err": 0.16105400786108817,
    "phi": 0.8389459921389119,
    "system": "scallop addmultprob",
    "version": "scallopy 0.2.4",
-   "via": "reference model (values 2.2e-16); F-3 grad model (4.8e-08)",
-   "worst_signed_err": 0.6087023833950306
+   "via": "reference model (values 2.2e-16); F-2 grad model (4.8e-08)",
+   "worst_signed_err": 0.6087023833950305
   },
   {
    "claimed": "distribution semantics",

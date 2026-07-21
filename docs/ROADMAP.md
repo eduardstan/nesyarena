@@ -55,7 +55,7 @@ conformance run on the frozen batteries + a short findings log in `out/`.
 | framework | what it tests | claimed semantics | effort | notes |
 |---|---|---|---|---|
 | **ProbLog k-best** | second deployed approximate inference (anytime bounds) | distribution semantics (bounds) | **done** | measured: sound on all 284 cells; exact at tight eps (6e-16); lower border is implicant-based — `out/conformance_problog_kbest.md` |
-| **Scallop `diff*` provenances** | deployed *gradient* semantics via torch tags | distribution semantics | **done** | top-k/min-max grads conform (3e-08); **finding F-3**: diffaddmultprob's clamp is straight-through (clamped value, unclamped gradient) — `out/conformance_scallop.md` |
+| **Scallop `diff*` provenances** | deployed *gradient* semantics via torch tags | distribution semantics | **done** | top-k/min-max grads conform (3e-08); **finding F-2**: diffaddmultprob's clamp is straight-through (clamped value, unclamped gradient) — `out/conformance_scallop.md` |
 | **DeepProbLog (standalone)** | the original NeurIPS-2018 system, exact engine | distribution semantics | **done** | measured: PASS at 4.4e-16 on all 71 instances incl. recursion — `out/conformance_deepproblog.md`; ApproximateEngine (needs SWI-Prolog) queued |
 | **LTN (Logic Tensor Networks)** | *fuzzy* axis: t-norm evaluation + smooth aggregators (pMean vs min) — widens scope beyond probabilistic | product real logic | **M** | new registered error laws possible (pMean bias, analogous to LSE) |
 | Lobster (GPU Scallop) | GPU/CPU consistency of a deployed engine | distribution semantics | **L** | needs CUDA + source build; stretch |
@@ -73,10 +73,10 @@ they only share the frozen instance set and the adapter protocol.
    frozen reference implementation) to the rebuilt core.
 3. **Recursion-faithful add-mult reference variant** (per finding F-1) +
    recursive overlap sweeps against Scallop.
-4. **Straight-through add-mult reference SUT** (per finding F-3) — **done,
+4. **Straight-through add-mult reference SUT** (per finding F-2) — **done,
    registered prediction refuted**: on both E6 settings training never
    enters the clamp region, so straight-through and min-clamp trajectories
-   are identical to every decimal; the F-3 value/gradient inconsistency is
+   are identical to every decimal; the F-2 value/gradient inconsistency is
    real at inference (E1: 100% clamp-pinned cells at p=0.9, P>=3) but
    latent in these learning designs. Follow-up (open): a saturation-prone
    learning task that keeps the raw proof-sum above 1 mid-training.

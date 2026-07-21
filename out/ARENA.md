@@ -17,7 +17,7 @@ claimed semantics; **phi = 1 only for exact inference**.
 | problog kbest lower bound (eps=0.2) | problog 2.2.10 | **0.914** | -0.193 | n/a | n/a | 0.720 | 0.0e+00 | sound bounds 284/284; lower border implicant-based |
 | scallop minmaxprob | scallopy 0.2.4 | **0.897** | +0.263 | 0.594 | 0.152 | 0.800 | 0.0e+00 | — |
 | scallop topkproofs k=1 | scallopy 0.2.4 | **0.847** | -0.378 | 0.767 | 0.351 | 0.720 | 2.9e-08 | — |
-| scallop addmultprob | scallopy 0.2.4 | **0.839** | +0.609 | 0.980 | 1.000 | 0.720 | 4.8e-08 | F-1 (recursion), F-3 (straight-through clamp) |
+| scallop addmultprob | scallopy 0.2.4 | **0.839** | +0.609 | 0.980 | 1.000 | 0.720 | 4.8e-08 | F-1 (recursion), F-2 (straight-through clamp) |
 
 ## How to read this table
 
@@ -43,7 +43,7 @@ claimed semantics; **phi = 1 only for exact inference**.
 - **measured via** (provenance of each row):
 
   - exact WMC (oracle semantics): definition
-  - scallop addmultprob: reference model (values 2.2e-16); F-3 grad model (4.8e-08)
+  - scallop addmultprob: reference model (values 2.2e-16); F-2 grad model (4.8e-08)
   - scallop topkproofs k=1: reference model (values 5.6e-17, grads 2.9e-08)
   - scallop topkproofs k=3: reference model (values 2.2e-16, grads 2.6e-08)
   - scallop minmaxprob: reference model (values 0.0, grads 0.0)
@@ -56,6 +56,6 @@ claimed semantics; **phi = 1 only for exact inference**.
 
 Reference (idealized) SUT rows are omitted: after validation they are
 numerically identical to the deployed rows they model. Per-framework
-detail and findings: `conformance_scallop.md` (F-1, F-3),
+detail and findings: `conformance_scallop.md` (F-1, F-2),
 `conformance_deeplog.md`, `conformance_problog_kbest.md`.
 Learning-consequence results (calibration, transfer): `RESULTS.md`.

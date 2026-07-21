@@ -38,7 +38,7 @@ class MyAdapter:
 1. **No normalization.** The adapter reports what the backend computes. If
    the backend deviates from its claim, the adapter must deviate identically;
    a deviation is a *finding about the backend's deployed semantics*, logged
-   with the witnessing instance (see `out/conformance_scallop.md`, findings F-1 and F-3, and
+   with the witnessing instance (see `out/conformance_scallop.md`, findings F-1 and F-2, and
    `out/conformance_ltn.md`).
 2. **Shared inputs.** Oracle and backend consume the identical `(program,
    base)`; that isolation is what makes the error attributable to the
@@ -54,7 +54,9 @@ class MyAdapter:
 | `adapters/base.py::ReferenceAdapter` | in-process | wraps the reference SUTs; the idealized comparison point |
 | `adapters/scallop.py` | scallopy context | program compilation (EDB atoms via `fact/1`), native recursion, FD gradients |
 | `adapters/deeplog.py` | DeepLog circuits | DNF-level; constant labels for values, symbolic labels + autograd for gradients |
-| `adapters/deepproblog.py` | DeepLog's DeepProbLog layer | program text rendering; currently pins finding F-2 |
+| `adapters/problog_kbest.py` | ProbLog k-best | program-level; sound anytime bounds, k sweep against exact inference |
+| `adapters/deepproblog_standalone.py` | DeepProbLog (original) | program text rendering; exact SDD inference |
+| `adapters/ltn.py` | LTNtorch `fuzzy_ops` | DNF-level Provenance; product and Gödel configurations, autograd gradients |
 
 ## Checklist before you claim conformance
 

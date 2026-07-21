@@ -73,7 +73,7 @@ def test_truth_matches_wmc_at_extremes():
 
 
 def test_straight_through_clamp_matches_f3_semantics():
-    """F-3 model: clamped value, unclamped gradient — including at saturation,
+    """F-2 model: clamped value, unclamped gradient — including at saturation,
     where the min-clamp op has zero gradient."""
     from nesyarena.suts import AddMultStraightThrough
 

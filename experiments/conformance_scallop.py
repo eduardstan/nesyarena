@@ -14,7 +14,7 @@ Batteries (benchmarks/instances_v1.json):
               produced finding F-1 (tuple-set-fixpoint truncation).
   gradients   diff* provenances with torch-tagged facts: Scallop's own
               autograd vs the reference SUTs' system-faithful gradients —
-              the battery that produced finding F-3 (straight-through clamp),
+              the battery that produced finding F-2 (straight-through clamp),
               including the saturation sweep. Needs torch in the scallop env.
 
 Findings log (the document of record): out/conformance_scallop.md.
@@ -146,7 +146,7 @@ def battery_gradients():
     st_worst = max(r["vs_unclamped_grad"] for r in R["saturation"])
     print(f"   live-gradient instances: {n_live}/{len(sat_insts)}; "
           f"max |deployed grad − unclamped-sum grad| = {st_worst:.2e} "
-          "(straight-through clamp, finding F-3)")
+          "(straight-through clamp, finding F-2)")
     return R
 
 
