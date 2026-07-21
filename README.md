@@ -13,10 +13,8 @@ as a function of program structure, plus what that error does to learning.
 > component, how external systems (Scallop, DeepLog) plug in, and what is and
 > isn't done yet. This README is the quick reference.
 
-Companion docs: [`docs/OVERVIEW.md`](docs/OVERVIEW.md) (plain-language guide),
-[`docs/ADAPTERS.md`](docs/ADAPTERS.md) (how to plug in a system),
-`NeSyArena_protocol_v1.md` (formal research design), `paper/main.tex` (the
-18-page technical report with all measured numbers).
+Companion docs: [`docs/OVERVIEW.md`](docs/OVERVIEW.md) (plain-language guide)
+and [`docs/ADAPTERS.md`](docs/ADAPTERS.md) (how to plug in a system).
 
 ## Quickstart
 
@@ -88,10 +86,8 @@ src/nesyarena/
                  through it and its corruption of the network measured
 experiments/     one runner per experiment (E1–E8 + scorecard); `make all` runs all
 tests/           the correctness contract: oracle ≡ ProbLog, gradients, error laws,
-                 and parity against the frozen reference implementation in legacy/
-legacy/          the verified Day-0 toy, kept as an executable specification
+                 and parity against the frozen golden fixtures (tests/fixtures/)
 out/             measured results from the experiment runs (RESULTS.md, JSON, figures)
-paper/           the 18-page technical report (main.tex → main.pdf)
 docs/            OVERVIEW.md (start here) and ADAPTERS.md (plug in a system)
 ```
 
