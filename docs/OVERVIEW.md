@@ -2,9 +2,8 @@
 
 This is the document to read first. It explains what the project does, how the
 pieces fit together, how to use them, and what is and isn't done yet. No prior
-context assumed. (The formal definitions and theorems are in the anonymous KR
-submission; the registered research design is `NeSyArena_protocol_v1.md`. This
-file is the plain-language bridge.)
+context assumed. (Formal definitions and proofs are in the accompanying
+paper; this file is the plain-language bridge.)
 
 ---
 
@@ -183,8 +182,8 @@ Grouped by what they do, with who-calls-what. Source is `src/nesyarena/`.
   `out/RESULTS.md`.
 - **`tests/`** — the correctness contract (102 tests): the oracle agrees with
   ProbLog to 1e-10, analytic gradients match finite differences, the error
-  laws hold, and the rebuilt code reproduces the frozen reference
-  implementation in `legacy/`.
+  laws hold, and the rebuilt code reproduces the frozen
+  golden fixtures in `tests/fixtures/`.
 
 ---
 
@@ -383,7 +382,7 @@ reasoning-layer error exactly measurable.
 
 **Q. Isn't this just probabilistic logic programming / semiring provenance
 again?** The algebraic background is inherited from that literature and is cited
-as such (see the anonymous KR submission for the formal treatment). What is new
+as such. What is new
 here is the *measurement*: the fidelity definitions, the signed error laws as
 registered predictions, the exact oracles with analytic gradients, the
 conformance measurements of deployed systems, and the learning-consequence
