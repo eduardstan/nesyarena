@@ -8,4 +8,4 @@
 | top-3-proofs | 4 | 1 | 0 | 0.3 | 4 | -0.103 |
 | min-max-prob | 1 | 2 | 0 | 0.3 | 2 | +0.210 |
 | ltn:product | 2 | 2 | 1 | 0.6 | 3 | +0.086 |
-| ltn:godel | 1 | 2 | 0 | 0.3 | 2 | +0.210 |
+| ltn:godel | — | — | — | — | — | none on the grid |

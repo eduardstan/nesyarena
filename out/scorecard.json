@@ -2,8 +2,6 @@
  "gradient_liveness": {
   "add-mult(clamped)": 0.6111111111111112,
   "exact-wmc": 1.0,
-  "ltn:godel": 1.0,
-  "ltn:product": 1.0,
   "min-max-prob": 0.1660920869254202,
   "top-1-proofs": 0.4982762607762608,
   "top-3-proofs": 0.8319567777901112
@@ -25,22 +23,6 @@
    "overlap (P=4, p=0.6)": 1.0,
    "pixel transfer efficiency": 1.0,
    "saturation (p=0.9, P>=3)": 1.0
-  },
-  "ltn:godel": {
-   "gradient liveness": 1.0,
-   "learning transfer (fact table)": 0.9050917749261417,
-   "multiplicity (c=0, p=0.6)": 0.7737670029274305,
-   "overlap (P=4, p=0.6)": 0.8099748916531516,
-   "pixel transfer efficiency": 0.7344142276132021,
-   "saturation (p=0.9, P>=3)": 0.929540287121164
-  },
-  "ltn:product": {
-   "gradient liveness": 1.0,
-   "learning transfer (fact table)": 0.9287355603325642,
-   "multiplicity (c=0, p=0.6)": 0.9999008114164585,
-   "overlap (P=4, p=0.6)": 0.884697854147648,
-   "pixel transfer efficiency": 0.7579810824304004,
-   "saturation (p=0.9, P>=3)": 0.8898303608589825
   },
   "min-max-prob": {
    "gradient liveness": 0.1660920869254202,

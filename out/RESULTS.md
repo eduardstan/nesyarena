@@ -2,9 +2,9 @@
 
 All numbers produced by the rebuilt core (`src/nesyarena/`) via the
 config-driven runners in `experiments/`; configs and their sha256 are
-embedded in each JSON. Conformance/finding logs: `G2_scallop.md`,
+embedded in each JSON. Conformance logs (one per framework):
 `conformance_scallop.md` (findings F-1, F-3), `conformance_deeplog.md`,
-`conformance_problog_kbest.md`.
+`conformance_problog_kbest.md`, `conformance_ltn.md`.
 
 ## E1 — overlap sweep (fidelity over the G1 grid)
 
@@ -12,7 +12,7 @@ embedded in each JSON. Conformance/finding logs: `G2_scallop.md`,
 |---|---|---|
 | add-mult(clamped) | 0.8632 | 0.1404 |
 | exact-wmc | 1.0000 | 0.0000 |
-| ltn:godel | 0.8228 | 0.1747 |
+| ltn:godel | 1.0000 | 0.1747 |
 | ltn:product | 0.9185 | 0.0819 |
 | min-max-prob | 0.8228 | 0.1747 |
 | top-1-proofs | 0.8569 | 0.1450 |
@@ -33,7 +33,7 @@ max |bias − tau·ln P| = 2.22e-16
 |---|---|---|---|---|---|---|
 | add-mult(clamped) | 2 | 1 | 0 | 0.6 | 2 | +0.160 |
 | exact-wmc | — | — | — | — | — | none |
-| ltn:godel | 1 | 2 | 0 | 0.3 | 2 | +0.210 |
+| ltn:godel | — | — | — | — | — | none |
 | ltn:product | 2 | 2 | 1 | 0.6 | 3 | +0.086 |
 | min-max-prob | 1 | 2 | 0 | 0.3 | 2 | +0.210 |
 | top-1-proofs | 2 | 1 | 0 | 0.3 | 2 | -0.210 |
@@ -43,8 +43,6 @@ max |bias − tau·ln P| = 2.22e-16
 
 - add-mult(clamped): **0.611**
 - exact-wmc: **1.000**
-- ltn:godel: **1.000**
-- ltn:product: **1.000**
 - min-max-prob: **0.166**
 - top-1-proofs: **0.498**
 - top-3-proofs: **0.832**
@@ -54,6 +52,7 @@ max |bias − tau·ln P| = 2.22e-16
 | SUT | control (disjoint) | treatment (overlap) | facts-quality | fact MAE |
 |---|---|---|---|---|
 | addmult | 0.010 ± 0.020 | 0.101 ± 0.029 | 0.123 | 0.128 |
+| addmult_st | 0.010 ± 0.020 | 0.101 ± 0.029 | 0.123 | 0.128 |
 | exact | 0.010 ± 0.020 | 0.000 ± 0.000 | 0.000 | 0.029 |
 | ltn_godel | 0.071 ± 0.059 | 0.095 ± 0.045 | 0.212 | 0.272 |
 | ltn_product | 0.050 ± 0.041 | 0.071 ± 0.017 | 0.081 | 0.110 |
@@ -69,7 +68,7 @@ max |bias − tau·ln P| = 2.22e-16
 | addmult_st | 0.734 ± 0.006 | 0.145 ± 0.002 | 0.093 ± 0.002 | 0.101 ± 0.002 |
 | exact | 0.740 ± 0.004 | 0.101 ± 0.003 | 0.062 ± 0.002 | 0.062 ± 0.002 |
 | ltn_godel | 0.742 ± 0.007 | 0.128 ± 0.002 | 0.085 ± 0.004 | 0.084 ± 0.001 |
-| ltn_product | 0.726 ± 0.005 | 0.130 ± 0.005 | 0.082 ± 0.003 | 0.087 ± 0.003 |
+| ltn_product | 0.727 ± 0.004 | 0.130 ± 0.005 | 0.082 ± 0.003 | 0.087 ± 0.003 |
 | minmax | 0.742 ± 0.007 | 0.128 ± 0.002 | 0.085 ± 0.004 | 0.084 ± 0.001 |
 | top1 | 0.744 ± 0.005 | 0.105 ± 0.004 | 0.068 ± 0.003 | 0.069 ± 0.003 |
 | top3 | 0.740 ± 0.004 | 0.101 ± 0.003 | 0.063 ± 0.003 | 0.063 ± 0.003 |
@@ -101,7 +100,7 @@ MNIST-path treatment (overlap):
 | addmult | 0.934 ± 0.006 | 0.160 ± 0.016 | 0.040 ± 0.002 | 0.040 ± 0.001 |
 | exact | 0.952 ± 0.003 | 0.097 ± 0.008 | 0.031 ± 0.001 | 0.031 ± 0.001 |
 | ltn_godel | 0.940 ± 0.006 | 0.140 ± 0.006 | 0.038 ± 0.002 | 0.036 ± 0.002 |
-| ltn_product | 0.948 ± 0.002 | 0.117 ± 0.007 | 0.033 ± 0.002 | 0.033 ± 0.002 |
+| ltn_product | 0.947 ± 0.002 | 0.117 ± 0.007 | 0.033 ± 0.002 | 0.033 ± 0.002 |
 | minmax | 0.940 ± 0.006 | 0.140 ± 0.006 | 0.038 ± 0.002 | 0.036 ± 0.002 |
 | top1 | 0.951 ± 0.002 | 0.095 ± 0.006 | 0.031 ± 0.001 | 0.031 ± 0.001 |
 | top3 | 0.952 ± 0.004 | 0.097 ± 0.009 | 0.031 ± 0.001 | 0.031 ± 0.001 |

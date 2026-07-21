@@ -28,7 +28,7 @@
    "system": "scallop addmultprob",
    "version": "scallopy 0.2.4",
    "via": "reference model (values 2.2e-16); F-3 grad model (4.8e-08)",
-   "worst_signed_err": 0.6087023833950305
+   "worst_signed_err": 0.6087023833950306
   },
   {
    "claimed": "distribution semantics",

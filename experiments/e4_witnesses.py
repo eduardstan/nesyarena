@@ -19,10 +19,19 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.environ.get("NESYARENA_OUT", os.path.join(HERE, "..", "out"))
 DELTA = 0.05
 
+def _registry_with_ltn():
+    """Sweep runners include the LTN configurations when LTNtorch is
+    installed; the core registry default stays backend-free."""
+    try:
+        return registry(include_ltn=True)
+    except ImportError:
+        return registry()
+
+
 
 def main():
     table = {}
-    for sut in registry():
+    for sut in _registry_with_ltn():
         w = find_witness(sut, delta=DELTA)
         table[sut.name] = w
     os.makedirs(OUT, exist_ok=True)
