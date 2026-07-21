@@ -5,7 +5,7 @@ alpha: 1.2          # signal strength; Bayes posterior is sigmoid(alpha*<x,sig> 
 pi: 0.55            # fact prior (treatment)
 din: 64             # image dimension (8x8)
 ncell: 6            # facts per sample (treatment structure has 6 facts)
-seeds: [0, 1, 2]
+seeds: [0, 1, 2, 3, 4]
 epochs: 20
 n_train: 4000
 n_test: 1500
