@@ -28,6 +28,7 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt  # noqa: E402
 
 import nesyarena  # noqa: E402
+from experiments.palette import sut_color  # noqa: E402
 from nesyarena.generators import overlap_family  # noqa: E402
 from nesyarena.metrics import fidelity  # noqa: E402
 from nesyarena.oracle import wmc  # noqa: E402
@@ -120,7 +121,8 @@ def fig_f2(rows: list[dict], cfg: dict) -> str:
     for name, style in [("add-mult(clamped)", "o-"), ("top-1-proofs", "s-"),
                         ("top-3-proofs", "^-"), ("min-max-prob", "d-")]:
         pts = sorted([(r["c"], r["err"]) for r in sel if r["sut"] == name])
-        ax.plot([c for c, _ in pts], [e for _, e in pts], style, label=name)
+        ax.plot([c for c, _ in pts], [e for _, e in pts], style,
+                color=sut_color(name), label=name)
     ax.axhline(0.0, color="k", lw=0.8)
     ax.set_xlabel("shared trunk facts c (overlap)")
     ax.set_ylabel("signed semantic error")

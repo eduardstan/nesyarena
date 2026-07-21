@@ -24,6 +24,7 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt  # noqa: E402
 
 import nesyarena  # noqa: E402
+from experiments.palette import truncation_color  # noqa: E402
 from nesyarena.algebra import MAXPROD, SUMPROD  # noqa: E402
 from nesyarena.engine import converge, infer_bounded  # noqa: E402
 from nesyarena.generators import chain_family, cyclic_family  # noqa: E402
@@ -101,7 +102,8 @@ def fig_f3(rows, hzn, cfg):
     ax1.plot(Ls, conv, "k--", label="convergent")
     for n in fc["show_n"]:
         vals = [next(r["value"] for r in sel if r["L"] == L and r["n"] == n) for L in Ls]
-        ax1.plot(Ls, vals, "o-", ms=3, label=f"unroll n={n}")
+        ax1.plot(Ls, vals, "o-", ms=3, color=truncation_color(n),
+                 label=f"unroll n={n}")
     ax1.set_xlabel("required proof depth L")
     ax1.set_ylabel(f"path value (p={fc['p']})")
     ax1.set_title("Truncation: value falls to 0 past the horizon", fontsize=9)

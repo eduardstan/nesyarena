@@ -36,6 +36,7 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt  # noqa: E402
 
 import nesyarena  # noqa: E402
+from experiments.palette import sut_color  # noqa: E402
 from nesyarena.generators import overlap_family  # noqa: E402
 from nesyarena.learning import BatchStructure, prov_value  # noqa: E402
 from nesyarena.oracle import wmc  # noqa: E402
@@ -166,16 +167,22 @@ def run_control(cfg):
     return res
 
 
-def fig_f6(treat, ctrl, names):
+def fig_f6(tstats, cstats, names):
+    """tstats/cstats[n][metric] = [mean, std] over seeds — the JSON's
+    `treatment`/`control` fields, so the figure regenerates from the JSON
+    alone."""
     fig, ax = plt.subplots(figsize=(8.4, 4.0), constrained_layout=True)
     x = np.arange(len(names))
     w = 0.38
-    cm = [np.mean(ctrl[n]["trans"]) for n in names]
-    cs = [np.std(ctrl[n]["trans"]) for n in names]
-    tm = [np.mean(treat[n]["trans"]) for n in names]
-    ts = [np.std(treat[n]["trans"]) for n in names]
-    ax.bar(x - w / 2, cm, w, yerr=cs, label="control: disjoint task (MNIST-sum structure)")
-    ax.bar(x + w / 2, tm, w, yerr=ts, label="treatment: overlap task (G1)")
+    cm = [cstats[n]["trans"][0] for n in names]
+    cs = [cstats[n]["trans"][1] for n in names]
+    tm = [tstats[n]["trans"][0] for n in names]
+    ts = [tstats[n]["trans"][1] for n in names]
+    cols = [sut_color(n) for n in names]
+    ax.bar(x - w / 2, cm, w, yerr=cs, color=cols, alpha=0.45,
+           label="control: disjoint task (MNIST-sum structure)")
+    ax.bar(x + w / 2, tm, w, yerr=ts, color=cols,
+           label="treatment: overlap task (G1)")
     ax.set_xticks(x, names, fontsize=8)
     ax.set_ylabel("held-out query error after training (5 seeds)")
     ax.set_title("Training through a misreasoner corrupts transferred knowledge —\n"
@@ -203,7 +210,7 @@ def main(config_path):
     res = os.path.join(OUT, "E6_facttable.json")
     with open(res, "w") as fh:
         json.dump(payload, fh, indent=1, sort_keys=True)
-    f6 = fig_f6(treat, ctrl, cfg["suts"])
+    f6 = fig_f6(payload["treatment"], payload["control"], cfg["suts"])
     print(f"{'SUT':10} {'control':>10} {'treatment':>10}   (mean held-out error, 5 seeds)")
     for n in cfg["suts"]:
         print(f"{n:10} {np.mean(ctrl[n]['trans']):>10.3f} {np.mean(treat[n]['trans']):>10.3f}")

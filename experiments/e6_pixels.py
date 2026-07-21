@@ -35,6 +35,7 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt  # noqa: E402
 
 import nesyarena  # noqa: E402
+from experiments.palette import sut_color  # noqa: E402
 from nesyarena.generators import overlap_family  # noqa: E402
 from nesyarena.learning import BatchStructure, prov_value  # noqa: E402
 
@@ -218,16 +219,18 @@ def run_control(cfg):
 
 # ---------------------------------------------------------------- figure ----
 
-def fig_f7(treat, cfg):
+def fig_f7(stats, cfg):
+    """stats[n][metric] = [mean, std] over seeds — the JSON's `treatment`
+    field, so the figure regenerates from the JSON alone."""
     names = cfg["treatment"]["suts"]
     fig, axes = plt.subplots(1, 3, figsize=(10.5, 3.3), constrained_layout=True)
     x = np.arange(len(names))
     for ax, metric, title in [(axes[0], "acc", "task accuracy (ties)"),
                               (axes[1], "cal", "calibration vs exact Bayes"),
                               (axes[2], "trans", "held-out transfer error")]:
-        mu = [np.mean(treat[n][metric]) for n in names]
-        sd = [np.std(treat[n][metric]) for n in names]
-        ax.bar(x, mu, yerr=sd, width=0.6)
+        mu = [stats[n][metric][0] for n in names]
+        sd = [stats[n][metric][1] for n in names]
+        ax.bar(x, mu, yerr=sd, width=0.6, color=[sut_color(n) for n in names])
         ax.set_xticks(x, names, fontsize=8, rotation=20)
         ax.set_title(title, fontsize=9)
         ax.grid(alpha=0.3, axis="y")
@@ -259,7 +262,7 @@ def main(config_path):
     res = os.path.join(OUT, "E6_pixels.json")
     with open(res, "w") as fh:
         json.dump(payload, fh, indent=1, sort_keys=True)
-    f7 = fig_f7(treat, cfg)
+    f7 = fig_f7(payload["treatment"], cfg)
     print(f"\n{'SUT':9} {'accuracy':>16} {'calibration':>16} {'transfer':>16}")
     for n in cfg["treatment"]["suts"]:
         print(f"{n:9} {np.mean(treat[n]['acc']):>8.3f} ± {np.std(treat[n]['acc']):.3f}"

@@ -33,6 +33,7 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt  # noqa: E402
 
 import nesyarena  # noqa: E402
+from experiments.palette import sut_color  # noqa: E402
 from nesyarena.learning import BatchStructure, prov_value  # noqa: E402
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -214,22 +215,27 @@ def run_control(cfg, mnist):
     return res
 
 
-def fig_f9(treat, ctrl, cfg):
+def fig_f9(tstats, cstats, cfg):
+    """tstats/cstats[n][metric] = [mean, std] over seeds — the JSON's
+    `treatment`/`control` fields, so the figure regenerates from the JSON
+    alone."""
     fig, axes = plt.subplots(1, 3, figsize=(10.5, 3.4), constrained_layout=True)
     names = cfg["treatment"]["suts"]
     x = np.arange(len(names))
     for ax, metric, title in [(axes[0], "acc", "MNIST-path: task accuracy"),
                               (axes[1], "trans", "MNIST-path: held-out transfer error")]:
-        ax.bar(x, [np.mean(treat[n][metric]) for n in names],
-               yerr=[np.std(treat[n][metric]) for n in names], width=0.6)
+        ax.bar(x, [tstats[n][metric][0] for n in names],
+               yerr=[tstats[n][metric][1] for n in names], width=0.6,
+               color=[sut_color(n) for n in names])
         ax.set_xticks(x, names, fontsize=8, rotation=20)
         ax.set_title(title, fontsize=9)
         ax.grid(alpha=0.3, axis="y")
     axes[0].set_ylim(0.5, 1.0)
     cn = cfg["control"]["suts"]
     xc = np.arange(len(cn))
-    axes[2].bar(xc, [np.mean(ctrl[n]["trans"]) for n in cn],
-                yerr=[np.std(ctrl[n]["trans"]) for n in cn], width=0.6)
+    axes[2].bar(xc, [cstats[n]["trans"][0] for n in cn],
+                yerr=[cstats[n]["trans"][1] for n in cn], width=0.6,
+                color=[sut_color(n) for n in cn])
     axes[2].set_xticks(xc, cn, fontsize=8, rotation=20)
     axes[2].set_title("MNIST-sum control: transfer error", fontsize=9)
     axes[2].grid(alpha=0.3, axis="y")
@@ -260,7 +266,7 @@ def main(config_path):
     res = os.path.join(OUT, "E5_mnist.json")
     with open(res, "w") as fh:
         json.dump(payload, fh, indent=1, sort_keys=True)
-    f9 = fig_f9(treat, ctrl, cfg)
+    f9 = fig_f9(payload["treatment"], payload["control"], cfg)
     print(f"\n{'SUT':9} {'accuracy':>15} {'perception':>15} {'transfer':>15}")
     for n in cfg["treatment"]["suts"]:
         print(f"{n:9} {np.mean(treat[n]['acc']):>7.3f} ± {np.std(treat[n]['acc']):.3f}"
