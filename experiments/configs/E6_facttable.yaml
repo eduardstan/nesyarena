@@ -15,4 +15,4 @@ optimizer: { steps: 4000, lr: 0.05 }
 # transfer differs from min-clamp addmult beyond seed noise (direction
 # open: no blackout, but unclamped push with no value feedback);
 # P2 — on the disjoint control (no saturation) addmult_st == addmult == exact.
-suts: [exact, addmult, addmult_st, top1, top3, minmax]
+suts: [exact, addmult, top1, top3, minmax, ltn_product, ltn_godel]

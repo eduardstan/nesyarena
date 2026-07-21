@@ -16,11 +16,11 @@ treatment:
   structure: { P: 4, L: 3, c: 2 }
   held_queries: [[0],[1],[2],[3],[0,1,2]]
   # addmult_st per finding F-3; registered predictions as in E6_facttable
-  suts: [exact, addmult, addmult_st, top1, top3, minmax]
+  suts: [exact, addmult, addmult_st, top1, top3, minmax, ltn_product, ltn_godel]
 control:
   pA_true: [0.5, 0.3, 0.2]
   pB_true: [0.3, 0.4, 0.3]
   train_terms: [[0,2],[1,1],[2,0]]   # query: zA + zB == 2 (mutually exclusive)
   held_terms: [[0,0],[1,1],[2,2]]    # transfer query: zA == zB
   # top3: k >= P on this structure — predicted identical to exact (measured)
-  suts: [exact, addmult, top1, top3, minmax]
+  suts: [exact, addmult, addmult_st, top1, top3, minmax, ltn_product, ltn_godel]

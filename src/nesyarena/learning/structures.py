@@ -93,6 +93,19 @@ class BatchStructure:
         per_proof = torch.stack([Pb[:, pi].amin(dim=1) for pi in self.pidx], dim=1)
         return per_proof.amax(dim=1)
 
+    def ltn_prod(self, Pb: torch.Tensor) -> torch.Tensor:
+        """LTN, connettivi prodotto (fo.AndProd/fo.OrProbSum): per-proof AND
+        e' gia' il prodotto (== scores()); tra i proof si fa OR-prod in
+        sequenza: a `or` b = a + b - a*b. minmax() sopra e' gia', byte per
+        byte, la variante Godel (And=min, Or=max) -- nessun metodo separato
+        serve per quella."""
+        sc = self.scores(Pb)                      # (B, P) AND-prod per proof
+        acc = sc[:, 0]
+        for j in range(1, sc.shape[1]):
+            b = sc[:, j]
+            acc = acc + b - acc * b
+        return acc
+
 
 def prov_value(name: str, S: BatchStructure, Pb: torch.Tensor,
                k: int | None = None) -> torch.Tensor:
@@ -104,6 +117,8 @@ def prov_value(name: str, S: BatchStructure, Pb: torch.Tensor,
         return S.addmult_st(Pb)
     if name.startswith("top"):
         return S.topk(Pb, k if k is not None else int(name[3:]))
-    if name == "minmax":
-        return S.minmax(Pb)
+    if name == "minmax" or name == "ltn_godel":
+         return S.minmax(Pb)
+    if name == "ltn_product":
+        return S.ltn_prod(Pb)
     raise ValueError(name)
