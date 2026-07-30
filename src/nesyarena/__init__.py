@@ -5,4 +5,4 @@ approximation computes and what its claimed semantics defines, as a function
 of program structure — plus the learning consequences.
 """
 
-__version__ = "0.1.0.dev0"
+__version__ = "0.1.0"

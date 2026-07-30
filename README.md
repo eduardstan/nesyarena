@@ -13,8 +13,9 @@ as a function of program structure, plus what that error does to learning.
 > component, how external systems (Scallop, DeepLog) plug in, and what is and
 > isn't done yet. This README is the quick reference.
 
-Companion docs: [`docs/OVERVIEW.md`](docs/OVERVIEW.md) (plain-language guide)
-and [`docs/ADAPTERS.md`](docs/ADAPTERS.md) (how to plug in a system).
+Companion docs: [`docs/OVERVIEW.md`](docs/OVERVIEW.md) (plain-language guide),
+[`docs/ADAPTERS.md`](docs/ADAPTERS.md) (how to plug in a system), and
+[`docs/PUBLISHING.md`](docs/PUBLISHING.md) (release guide).
 
 ## Quickstart
 
