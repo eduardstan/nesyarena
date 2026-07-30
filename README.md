@@ -106,3 +106,7 @@ e.g. deterministic min-max tie-breaking).
   results.
 - The oracle battery (reference WMC ≡ ProbLog < 1e-10) must stay green on every
   commit — the ground truth never silently drifts.
+
+## License
+
+MIT — see [LICENSE](LICENSE).
