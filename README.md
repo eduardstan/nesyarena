@@ -89,7 +89,8 @@ experiments/     one runner per experiment (E1–E8 + scorecard); `make all` run
 tests/           the correctness contract: oracle ≡ ProbLog, gradients, error laws,
                  and parity against the frozen golden fixtures (tests/fixtures/)
 out/             measured results from the experiment runs (RESULTS.md, JSON, figures)
-docs/            OVERVIEW.md (start here) and ADAPTERS.md (plug in a system)
+docs/            project documentation (start with OVERVIEW.md; see the
+                 companion-docs links above)
 ```
 
 Correctness is gated by parity: `tests/fixtures/toy_golden.json` pins the
