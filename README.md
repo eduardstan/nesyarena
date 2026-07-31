@@ -13,8 +13,9 @@ as a function of program structure, plus what that error does to learning.
 > component, how external systems (Scallop, DeepLog) plug in, and what is and
 > isn't done yet. This README is the quick reference.
 
-Companion docs: [`docs/OVERVIEW.md`](docs/OVERVIEW.md) (plain-language guide)
-and [`docs/ADAPTERS.md`](docs/ADAPTERS.md) (how to plug in a system).
+Companion docs: [`docs/OVERVIEW.md`](docs/OVERVIEW.md) (plain-language guide),
+[`docs/ADAPTERS.md`](docs/ADAPTERS.md) (how to plug in a system), and
+[`docs/PUBLISHING.md`](docs/PUBLISHING.md) (release guide).
 
 ## Quickstart
 
@@ -88,7 +89,8 @@ experiments/     one runner per experiment (E1–E8 + scorecard); `make all` run
 tests/           the correctness contract: oracle ≡ ProbLog, gradients, error laws,
                  and parity against the frozen golden fixtures (tests/fixtures/)
 out/             measured results from the experiment runs (RESULTS.md, JSON, figures)
-docs/            OVERVIEW.md (start here) and ADAPTERS.md (plug in a system)
+docs/            project documentation (start with OVERVIEW.md; see the
+                 companion-docs links above)
 ```
 
 Correctness is gated by parity: `tests/fixtures/toy_golden.json` pins the
